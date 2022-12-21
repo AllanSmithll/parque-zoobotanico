@@ -308,6 +308,8 @@ ALTER TABLE RECURSO_ARMAZENADO   ADD CONSTRAINT nume_galpao_check CHECK (nume_ga
 
 /* Inserções */
 
+/* VISITANTE */
+
 INSERT VISITANTE(CPF, RG, nome,genero,email,data_nasc,pais_orig,esta_prov,cidade) values('11914755308', '1191475',	'Melvin',	'M',	'MelvinSConway@einrot.com',	"5/18/2003",	DEFAULT,	"Santa Catarina",	"Florianópolis"
 )
 
@@ -462,3 +464,1036 @@ INSERT VISITANTE(CPF, RG, nome,genero,email,data_nasc,pais_orig,esta_prov,cidade
 INSERT VISITANTE(CPF, RG, nome,genero,email,data_nasc,pais_orig,esta_prov,cidade) values('10670004294', '1067000',	'Jane',	'F',	'JaneKHogan@superrito.com',	"7/28/1970",	DEFAULT,	"Goiás",	"Goiás",
 );
 INSERT VISITANTE(CPF, RG, nome,genero,email,data_nasc,pais_orig,esta_prov,cidade) values('76596456412', '7659645',	'Christopher',	'M',	'ChristopherRMcClary@gustr.com',	"9/12/1980",	DEFAULT,	DEFAULT,	DEFAULT,)
+
+/* RECURSO_ARMAZENADO */
+
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("ALINDLPP", "75108761000160", "carne", 200.70, "KG", "Alimento", "13-12-2022", "10-02-2023", 500.00, "AA001", 1, "AAA01"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("MANBUBUS", "11661872000117", "tinta", 50.00, "l", "Manutenção", "02-10-2022", "02-10-2037", 120.00, 'BB001', 1, 'AAA01'
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("LIMJINDJ", "08799660000113", "sabão", 100.00, "KG", "Limpeza", "15-12-2022", "15-12-2023", 200.00, "CC001", 1, "AAA01"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("JAUWUIWS", "07530555000194", "jaula", 13, "unid", "Jaula", "29-08-2022", "00-00-00", 20, "DD001", 1, "DDD01"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("FARIWWWX", "08917962000111", "analgésico", 12, "unid", "Fármaco", "10-12-2022", "10-12-2024", 20, "EE001", 1, "AAA01"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("FARDUWBQ", "08917962000111", "anti-inflamatório", 15, "unid", "Fármaco", "10-12-2022", "10-12-2023", 20, "EE001", 1, "AAA02"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("ALIWUHHO", "97429620000182", "penca de banana", 94, "unid", "Alimento", "20-12-2022", "27-12-2022", 150, "AA001", 1, "AAA02"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("VETQCMPI", "96793493000133", "vac antirábica", 7, "unid", "Veterinário", "15-12-2022", "22-12-2025", 15, "FF001", 1, "AAA01"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("VETDUIWW", "96793493000133", "anestésico", 16, "unid", "Veterinário", "12-11-2022", "22-12-2025", 20, "FF001", 1, "AAA01"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("PROWESDP", "37829203000132", "par de luvas", 34, "unid", "Mat. Profissa", "10-11-2022", "00-00-0000", 100, "GG001", 1, "AAA02"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("ALIWSPME", "75108761000160", "cacho de uvas", 82, "unid", "Alimento", "20-12-2022", "29-12-2022", "AA001", 1, "AAA03"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("MANXCMEA", "11661872000117", "ferramentas", 63, "unid", "Manutenção", "09-09-2021", "00-00-0000", "BB001", 1, "AAA02"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("LIMCNCWM", "08799660000113", "desinfetante", 14, "unid", "Limpeza", "10-12-2022", "10-12-2024", "CC001", 1, "AAA02"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("FAMCOWOW", "08917962000111", "antialérgico", 9, "unid", "Fármaco", "07-11-2022", "07-11-2024", 15, "EE001", 1, "AAA03"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("FAMNANAC", "08917962000111", "antibiótico", 11, "unid", "Fármaco", "08-10-2022", "08-10-2024", 25, "EE001", 1, "AAA04"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("ALISOWMD", "97429620000182", "manga", 20, "unid", "Alimento", "20-12-2022", "27-10-2022", 40, "AA001", 1, "AAA04"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("ALISOWMQ", "97429620000182", "maçã", 20, "unid", "Alimento", "20-12-2022", "27-10-2022", 40, "AA001", 1, "AAA05"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("FAREMOIC", "08917962000111", "cicatrizante", 28, "unid", "Fármaco", "19-12-2022", "19-12-2024", 45, "EE001", 1, "AAA05"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("FARWENIU", "08917962000111", "vermifungo", 30, "unid", "Fármaco", "19-12-2022", "19-12-2024", 45, "EE001", 1, "AAA06"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("LIMDOHDO", "08799660000113", "cloro", 13, "l", "Limpeza", "10-09-2022", "10-09-2024", 30, "CC001", 1, "AAA03"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("FARMPZEC", "08917962000111", "antitóxico", 20, "unid", "20-11-2022", "20-11-2024", 45, "EE001", 1, "AAA07"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("FARPNVWP", "08917962000111", "antitetânico", 26, "unid", "20-09-2022", "20-09-2024", 30, "EE001", 1, "AAA08"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("FAREWPWN", "08917962000111", "dexametasona", 28, "unid", "17-10-2022", "17-10-2024", 30, "EE001", 1, "AAA09"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("FARHQWQW", "08917962000111", "sulfamexazol", 29, "unid", "13-08-2022", "13-08-2024", 30, "EE001", 1, "AAA10");
+
+/* PROJETO_PESQUISADO */
+
+insert PROJETO_PESQUISA(ID,titulo,subtitulo)
+values("25444487", "Convivência de Humanos com animais",  null
+)
+insert PROJETO_PESQUISA(ID,titulo,subtitulo)
+values("41215854", "importância na adaptação aos habitats", null
+)
+insert PROJETO_PESQUISA(ID,titulo,subtitulo)
+values("11344774", "Ansiedade em animais silvestres",  "Tratando das causas"
+)
+insert PROJETO_PESQUISA(ID,titulo,subtitulo)
+values("01744478", "Poluição sonora frente aos animais",  "Comportamento Animal"
+)
+insert PROJETO_PESQUISA(ID,titulo,subtitulo)
+values("92475154", "Enfretamento a poluição",  "Impacto nos Animais"
+)
+insert PROJETO_PESQUISA(ID,titulo,subtitulo)
+values("10414765", "Desenvolvimento sustentavél", null
+)
+insert PROJETO_PESQUISA(ID,titulo,subtitulo)
+values("14875434", "Alimentação inadequada por visitantes", "E como enfrentar"
+)
+insert PROJETO_PESQUISA(ID,titulo,subtitulo)
+values("68955794", "A influência Da vegetação",   "E beneficios dela" 
+)
+insert PROJETO_PESQUISA(ID,titulo,subtitulo)
+values("35442851", "Causas de enfermidades em animais", null
+)
+insert PROJETO_PESQUISA(ID,titulo,subtitulo)
+values("75145896", "O Conivio entre os animais",    "E como comportam-se")
+
+/* PROJETO DESENVOLVIDO */
+
+insert(pesquisador,cod_proj,data_inicio,data_final) values("64482378798", "41215854","2012-04-10", "2013-05-12"
+)
+insert(pesquisador,cod_proj,data_inicio,data_final) values("11914755308", "25444487","2010-11-25", "2013-10-28"
+)
+insert(pesquisador,cod_proj,data_inicio,data_final) values("24344841158", "01744478","2017-02-01", "2018-10-25"
+)
+insert(pesquisador,cod_proj,data_inicio,data_final) values("23156909432", "11344774","2015-06-29", "2016-12-05"
+)
+insert(pesquisador,cod_proj,data_inicio,data_final) values("97723581319", "10414765","2010-10-10", "2011-05-16"
+)
+insert(pesquisador,cod_proj,data_inicio,data_final) values("76426078735", "92475154","2013-12-02", "2015-06-17"
+)
+insert(pesquisador,cod_proj,data_inicio,data_final) values("67781375505", "68955794","2014-06-05", "2016-12-12"
+)
+insert(pesquisador,cod_proj,data_inicio,data_final) values("52107813647", "14875434","2012-12-12", "2014-01-25"
+)
+insert(pesquisador,cod_proj,data_inicio,data_final) values("63612908405", "75145896","2011-08-20", "2013-01-10" 
+)
+insert(pesquisador,cod_proj,data_inicio,data_final) values("23940071501", "35442851" ,"2016-09-17", "2018-04-21")
+
+/* PEQUISADOR */
+insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+values("64482378798", "99844114", "UFPB - Campus João Pessoa","Superior Completo - Bacharelado" , 2020
+)
+insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+values("23156909432", "34141937", "IFPB - Campus João Pessoa","Ensino Médio completo",	         2018
+)
+insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+values("24344841158", "66672372", "UERJ - Campus Maracanã",   "Superior Completo - Pós graduado", 2000
+)
+insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+values("76426078735", "34309530", "IFPE - Campus Recife",     "Superior incompleto - Tecnólogo",    2022
+)
+insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+values("97723581319", "63963130", "UFCG - Campus Cajazeiras", "Superior incompleto - Bachalerado",2005)
+insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+values("52107813647", "94079542", Null, Null, NULL
+)
+insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+values("67781375505", "63998365", "UFMG - Campus Belo Horizonte", "Superior incompleto - Bachalerado", 2001
+)
+insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+values("23940071501", "37983688", "UFMS - Campus Pantanal",    "Superior Completo - Pós graduado",   2000
+)
+insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+values("63612908405", "79365839", "UFCG - Campus Cajazeiras",  "Superior Completo - Bachalerado",    2008
+)
+insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+values("54052700597", "65981431", Null,Null,Null
+)
+insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+values("71106412443", "15965869", "UFBA - Campus Salvador",    "Superior Completo - Tecnólogo",      2020
+)
+insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+values("11581721927", "25797981", "UFSM - Campus Sachoeira Do Sul", "Superior Completo - Tecnólogo", 2021
+)
+insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+values("41497522498", "76973274"  "UFSM - Campus Sachoeira Do Sul", "Superior incompleto - Bachalerado", Null
+)
+insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+values("44028157706", "47628026", "UFBA - Campus Salvador",   "Superior incompleto - Pós graduado",      2007             
+)
+insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+values("55537846543", "16623773", "UFSC - Campus Joinville",  "Superior Completo - Doutorado",      2004
+)
+insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+values("83668066850", "88010090", "USP -  Campus São Carlos", "Superior Completo - Pós graduado",   2005                
+)
+insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+values("99288674101", "98459854", "UFRJ - Campus Duque De Caxias", "Superior Completo - Doutorado", 1995
+)
+insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+values("98503973901", "75655932", "UERJ - Campus Maracanã",    "Superior Completo - Pós graduado",  2018
+)
+insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+values("64603661010", "18374189", "UFCG - Campus João Pessoa", "Superior Completo - Doutorado",   "2003"
+)
+insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+values("67926064726", "15875125", "USP -  Campus São Carlos",  "Superior Completo - Tecnólogo",   2020
+)
+insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+values("95385258415", "81647247", "UFRJ - Campus Duque De Caxias", "Superior Completo - Doutorado", "1985"
+)
+insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+values("48949340860", "60874566", "UFPE - Campus Recife",    "Superior Completo - Bachalerado",  NULL
+)
+insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+values("96837117408", "81417163", "UFC -  Campus Fortaleza", "Superior Completo - Doutorado",    "1986"
+)
+insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+values("49879959485", "20233883", "UFBA - Campus Salvador",  "Superior Completo - Doutorado",    "1998"
+)
+insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+values("93417036542", "11589966", "UFMG - Campus Belo Horizonte", "Superior Completo - Bachalerado", 2021)
+
+/* INGRESSO_DISPONÍVEL */
+
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("84376803", 2);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("3121H045", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("251405U2", 2);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("5K63IG74", 5);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("47243P85", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("C2L24B0R", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("42528BE7", 2);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("5N754P0G", 5);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("4SPW7H14", 5);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("L302C6M4", 5);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("4Q7411M0", 2);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("502FB233", 2);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("AQ62133H", 1);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("G5K5B214", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("KK112B77", 1);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("241874P5", 1);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("0L702053", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("21EN62X7", 1);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("73732UJ3", 1);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("1O73S073", 2);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("P28H2355", 2);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("US22G4P7", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("5M5R58T4", 1);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("FVH7E770", 5);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("580I43UI", 2);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("I8O77X62", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("SJI1V025", 5);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("1Y3NE070", 5);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("0JM5X857", 5);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("2564CX65", 5);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("WYL58V4O", 5);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("SOF10258", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("58LPT5C5", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("8G28F154", 2);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("7W46Y0G4", 5);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("2668MVA6", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("T84G1175", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("147NQ737", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("3XS7G48Q", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("YI080AKB", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("N7H0L270", 5);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("1V0772X7", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("5727Q18E", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("2348XX5U", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("8M86536J", 2);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("6J7S0230", 5);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("8WIUW477", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("2W15GR6F", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("5385SICA", 5);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("04MD5Y18", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("414138FS", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("0UQ3GQ5W", 5);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("41FFYM3F", 5);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("88834GPO", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("60H30TA5", 5);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("VNYG501L", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("I05436TB", 5);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("4CC357C7", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("0EC08558", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("6G885435", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("U11XY5U5", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("3Y51RS7Q", 5);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("11330451", 5);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("558GF658", 5);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("AH570060", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("K01W5KJ7", 5);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("T565IN61", 5);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("23205Y70", 5);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("DL806DB3", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("8138872T", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("N1EE75L8", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("C275WKMY", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("618DI008", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("5I624XF5", 2);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("7121W4L7", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("14854750", 2);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("066372FV", 5);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("R5OP1K86", 2);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("FQ60663B", 5);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("20325243", 1);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("N3B535L4", 2);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("6741VGK3", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("W226Q856", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("6DJSN854", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("UT804OKY", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("R46T7H35", 1);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("I0705W8E", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("77M326A7", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("5010VUU2", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("44V31567", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("004S4622", 1);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("S5YY4O32", 1);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("JK78B616", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("G5Q47M7O", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("K22U6508", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("V70B01U8", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("15763208", 2);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("88853887", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("78ER2N55", 1);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("418544X8", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("50124360", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("Q244686T", 1);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("2723A715", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("00R81172", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("3R500H55", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("1H7H1114", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("75BJ25L5", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("1430TQ4R", 2);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("4K650051", 1);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("4B4366S2", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("OI4LN7H0", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("H1H3G3FC", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("28243247", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("HX6Q52V1", 2);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("O51B1NF0", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("SB211165", 1);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("5H148508", 1);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("812H1530", 2);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("17L0GX8A", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("0401L8K1", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("D161020M", 2);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("18GA163U", 1);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("41034182", 2);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("AC5OIL86", 2);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("1234Q400", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("6522Q5M0", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("M5TT7P00", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("2C037166", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("10CAQ2W3", 2);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("4146200I", 1);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("4207863H", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("J7X43243", 2);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("3232424M", 1);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("75FH14GA", 2);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("5N72Y286", 1);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("EO2387F8", 2);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("3W644IT8", 2);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("R0GMJ443", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("8DHE7BO1", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("6G2746PS", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("18Q34007", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("04TC15G0", 1);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("3K664G70", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("11523058", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("0T337TL4", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("DU86YU4B", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("O13221I3", 2);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("274CSB2I", 4);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("513J6NNE", 3);
+insert INGRESSO_DISPONIVEL(ID,tipo)
+values("8H70V427", 4);
+
+/* INGRESSOS_COMPRADOS */
+
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("P61X26734V4", "83668066850","8G28F154",NULL,"2022-12-20");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("RN112702424", "99288674101","C275WKMY",NULL,"2022-12-19");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("4SS420275W5", "98503973901","77M326A7",NULL,"2022-12-17");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("0M07NK6SDQP", "64603661010","T565IN61",NULL,"2022-12-16");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("2M1660701FS", "67926064726","N7H0L270",NULL,"2022-12-17");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("88H7TT41GN5", "95385258415","O51B1NF0",NULL,"2022-12-15");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("2PFO07P7010", "48949340860","5010VUU2",NULL,"2022-12-19");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("075TG08687Y", "96837117408","6G885435",NULL,"2022-12-17");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("64C7236X264", "49879959485","3121H045",NULL,"2022-12-16");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("5FMG42A540B", "93417036542","004S4622",NULL,"2022-12-19");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("465S05028FF", "34228058507","8DHE7BO1",NULL,"2022-12-19");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("238YJ821KE1", "47994960006","0401L8K1",NULL,"2022-12-15");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("6L2Q5L187YO", "29934345781","11523058",NULL,"2022-12-19");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("2W46172I6V0", "38661444829","18GA163U",NULL,"2022-12-18");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("706Q1145S27", "58623066251","21EN62X7",NULL,"2022-12-15");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("2J3DP8A584F", "60590923145","4CC357C7",NULL,"2022-12-20");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("218375EH7LT", "71945058609","5385SICA",NULL,"2022-12-19");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("Q7J0066462G", "51218481706","558GF658",NULL,"2022-12-17");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("EJ33A87V532", "50914287630","R5OP1K86",NULL,"2022-12-17");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("4HNJPE54K37", "72313085708","78ER2N55",NULL,"2022-12-20");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("PD37003311X", "37353265523","20325243",NULL,"2022-12-15");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("186N8524RE1", "57095314802","2W15GR6F",NULL,"2022-12-15");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("I2I3238100J", "31295917025","58LPT5C5",NULL,"2022-12-20");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("H308D773352", "13725158282","580I43UI",NULL,"2022-12-18");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("26AUV7231U7", "87940104047","JK78B616",NULL,"2022-12-17");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("2Q1110384KL", "67584336841","N1EE75L8",NULL,"2022-12-18");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("N1DU45X11BW", "43335280032","3W644IT8",NULL,"2022-12-17");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("13YKW73N8IN", "96981046407","6741VGK3",NULL,"2022-12-17");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("46I87WT8EV2", "90320237729","U11XY5U5",NULL,"2022-12-15");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("74O8O7Q6E00", "94684010228","88853887",NULL,"2022-12-20");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("22L17118011", "35860652569","8M86536J",NULL,"2022-12-19");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("5B8N15G8500", "53852974534","SB211165",NULL,"2022-12-18");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("61850DDY4KP", "83943706168","1V0772X7",NULL,"2022-12-19");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("8781675E316", "14375303549","0L702053",NULL,"2022-12-18");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("353M7287M3E", "86063755861","AQ62133H",NULL,"2022-12-19");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("58N3PH3454D", "63782435818","6J7S0230",NULL,"2022-12-18");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("40561M7W317", "60159197287","KK112B77",NULL,"2022-12-15");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("876A15KJT81", "79889368919","15763208",NULL,"2022-12-17");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("JXV66772114", "73648130048","147NQ737",NULL,"2022-12-16");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("44WGE458584", "51833500350","42528BE7",NULL,"2022-12-19");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("42783F3V18B", "53220781187","2348XX5U",NULL,"2022-12-19");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("78U56236OXN", "33530650757","SJI1V025",NULL,"2022-12-20");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("2474458420M", "84251814100","41FFYM3F",NULL,"2022-12-18");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("R8S51DB2YU6", "47867205268","5H148508",NULL,"2022-12-17");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("25CD471M82V", "93298973122","AC5OIL86",NULL,"2022-12-18");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("40DW4WB8C33", "80247071102","4B4366S2",NULL,"2022-12-20");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("5618EF5G3W4", "26618488354","N3B535L4",NULL,"2022-12-20");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("KP45GQE064S", "40113187106","47243P85",NULL,"2022-12-17");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("GKD5288B06Q", "16950339496","5M5R58T4",NULL,"2022-12-20");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("DYW8N27C325", "12683202261","T84G1175",NULL,"2022-12-20");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("2J6664FE064", "10181769930","4146200I",NULL,"2022-12-15");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("JJ0SM543N36", "94567438450","K22U6508",NULL,"2022-12-19");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("S3I3W723M75", "97084191097","10CAQ2W3",NULL,"2022-12-18");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("0F173K05238", "63979484807","251405U2",NULL,"2022-12-18");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("2W5O4186120", "13921434386","0UQ3GQ5W",NULL,"2022-12-20");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("60603L8E25E", "68285106403","14854750",NULL,"2022-12-17");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("FM734CJLTVX", "40351060979","6G2746PS",NULL,"2022-12-18");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("377UE122FW7", "39496798551","17L0GX8A",NULL,"2022-12-16");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("824U0271EUB", "57423634948","EO2387F8",NULL,"2022-12-20");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("CH77826I516", "10670004294","WYL58V4O",NULL,"2022-12-18");
+INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("180J0YF3W27", "76596456412","Q244686T",NULL,"2022-12-18");
+
+/* INGRESSO_CATALOGO */
+
+insert (tipo_id,preco,area_perm,cor) values('ADULTO', '15.00', 'Áreas de lazer; Parte externa dos habitats e estufas;', 'AZUL');
+insert (tipo_id,preco,area_perm,cor) values('PESQUISADOR', '10.00', 'Áreas de lazer; Parte externa e interna dos habitats e estufas; Àreas de pesquisa e coleta de amostras;', 'VERDE');
+insert (tipo_id,preco,area_perm,cor) values('INFANTIL', '5.00', 'Áreas de lazer; Parte externa dos habitats e estufas; Praça infantil;', 'AMARELO');
+insert (tipo_id,preco,area_perm,cor) values('ESCOLAR', '3.50', 'Áreas de lazer; Parte externa dos habitats e estufas; Àreas de diversão extremas; Praça Infantil; Espaço na área de Amostra', 'VERMELHO');
+insert (tipo_id,preco,area_perm,cor) values('APRECIANTE DE COMIDA EXÓTICA', '0.00', 'Parte interna dos habitats e estufas; restaurante privado', 'PÚRPURA');
+
+/* HABITAT */
+
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("WKUPCFJBXV", True, "neve", 1);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("WWQQNSJWVQ", False, "areia", 6);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("THDRHUABEV", True, "rocha", 3);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("URUMXODBTH", True, "água", DEFAULT);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("IWQXWMKTBW", False, "híbrido", 5);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("OIERVHEHLR", False, "granito", 2);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("SZTOKXPWJO", True, "neve", 3);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("KBWQNIRNZZ", True, "híbrido", 4);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("VDDFYLAMZV", True, DEFAULT, 3);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("YHWYZVBWAI", False, "neve", 1);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("OZNYQASVOP", False, "granito", 3);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("OQMGEHZRRG", False, "areia", 5);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("WSSCNMTLHC", True, Default, 9);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("XIRUZGRBAI", True, "água", DEFAULT);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("TETZVZOOFR", True, Default, 5);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("MELQHANYVP", True, "granito", 9);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("XLDBUKVVNM", False, "água", DEFAULT);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("JPGICPVWWH", False, DEFAULT, 5);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("GSUYEEDLGN", False, "híbrido", 8);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("BGURSDPASI", False, Default, 5);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("DCAZGJVPMJ", True, "granito", 1);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("BIGKQLNQSB", True, "água", DEFAULT);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("ZDVRGKWSHK", True, "areia", 4);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("MNZRINWTPZ", True, "neve", 2);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("KOCIISRBFF", True, "água", DEFAULT);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("AWGKBAJRFQ", False, "granito", 4);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("HUPZCKBPCL", False, Default, 7);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("JDHRQCBYQF", False, "neve", 5);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("PQQNMNOTRE", False, "areia", 2);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("EZUMVXICDS", False, Default, 9);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("PKKPZHRYSC", True, "granito", 9);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("APLEOUASAG", True, "rocha", 3);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("TEJAGKPHLM", True, "híbrido", 4);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("ILYAXWQZDK", True, "rocha", 2);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("WXRWRJQJRT", True, "híbrido", 9);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("OFORHMUICA", False, "híbrido", 2);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("WDGBAMCIQB", False, Default, 10);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("SXLXRAVMQE", False, "rocha", 3);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("POYKKGLRTP", False, "areia", 7);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("HXIXSRZMYD", False, "granito", 8);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("FDJUYIMSUY", False, "rocha", 7);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("HHGLOZQUDW", False, Default, 5);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("IHLJDRJURM", True, "rocha", 6);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("MJGFTHGOJS", False, Default, 10);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("CFVJBWQYJX", True, "granito", 9);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("KZDUDCQEOU", False, Default, 9);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("FLTJREKWRX", True, "areia", 3);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("DHLGWTQAWD", False, "granito", 1);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("QFLPIHDGNC", True, "água", DEFAULT);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("TNUNYGZNRD", True, "neve", 6);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("EZACYYNISU", False, "granito", 8);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("UZEAMZNXAN", False, "granito", 2);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("ANVWQWPXYT", False, "areia", 6);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("VUYPUXJAZB", False, Default, 2);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("VAWGOAEZIH", False, "neve", 3);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("LSOIXLADKC", False, "granito", 2);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("DEARFJQZAI", False, "granito", 4);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("TQPEGWXCYV", False, "neve", 8);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("XCWCYASPTN", False, Default, 8);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("NQPBFXEHGP", True, Default, 1);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("FVSXYSBZNQ", False, "água", DEFAULT);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("MJGPNUSNNH", True, "neve", 5);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("OXFUQXXTGV", True, "granito",6);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("BWHIALZRBB", True, "granito", 3);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("AAOILQDASH", True, "areia", 1);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("KYTDNXRCTH", False, "granito", 6);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("THGMZTSIDB", False, "água", DEFAULT);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("UGDFSKWZRQ", True, "areia", 3);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("RUSMRIHOVK", False, "neve", 9);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("NTZZHUZKXG", False, "água", DEFAULT);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("RXHRFGDGLO", False, "granito", 4);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("QLQOCBYDEH", False, "água", DEFAULT);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("BVEVLDUUGA", False, "areia", 1);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("PTDNZUENPG", True, "granito", 8);
+insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("IRTBPKZIVB", True, "água", DEFAULT);
+
+/* FORNECEDOR */
+
+insert FORNECEDOR(CNPJ,ENDERECO, nome_fant)
+values("75108761000160", "Av. Francislau, 40, Edifício João Cléber, apartamento 20 - Centro - João Pessoa - Paraíba", "Imaculada Alimentos LTDA"
+);
+insert FORNECEDOR(CNPJ,ENDERECO, nome_fant)
+values("11661872000117", "Rua Rodofreldo, 190, perto do lado da oficina do Romeu - Cristo - João Pessoa - Paraíba", "Djique Manutenção de Habitats LTDA"
+);
+insert FORNECEDOR(CNPJ,ENDERECO, nome_fant)
+values("80799660000113", "Av. Dom João Figueredo, 410, de frente ao Mercado da Barganha - Geisel - João Pessoa - Paraíba", "Vulgo Castro Materiais de Limpeza LTDA"
+);
+insert FORNECEDOR(CNPJ,ENDERECO, nome_fant)
+values("07530555000194", "Av. Jabuticaba, 128 - Saúde - São Paulo - São Paulo", "Alfredo Jaulas LTDA"
+);
+insert FORNECEDOR(CNPJ,ENDERECO, nome_fant)
+values("08917962000111", "Rua da Jumenta, 400, via Expressa de Café com Leite - Chade - Florianópoles - Santa Catarina", "Ultrafarma Comercio de Produtos Farmaceuticos LTDA" 
+);
+insert FORNECEDOR(CNPJ,ENDERECO, nome_fant)
+values("97429620000182", "Av. do Cabrito, 24, por trás da loja Brasilianos - Maneiro - Manaus - Amazonas", "Haiz Frutas Naturais LTDA"
+);
+insert FORNECEDOR(CNPJ,ENDERECO, nome_fant)
+values("96793493000133", "Rua dos Faz Tudo e Mais um pouco, 9, ao lado da creche - Bessa - João Pessoa - Paraíba", "João Bosco Equipamento Veterinário"
+);
+insert FORNECEDOR(CNPJ,ENDERECO, nome_fant)
+values("37829203000132", "Av. João Boscudo, 10, em frente a Palhoça do Açougueiro - Centro - Recife - Pernambuco", "Loki Equipamento Profissional");
+
+/* FORNECEDOR_EMAIL */
+
+insert FORNECEDOR_EMAIL(CNPJ, email) values ("75108761000160", "imaculadaalimentos@gmail.com");
+insert FORNECEDOR_EMAIL(CNPJ, email) values ("11661872000117", "djiquemanutencao@email.com");
+insert FORNECEDOR_EMAIL(CNPJ, email) values ("80799660000113", "saopaulino.carnes@yahoo.com");
+insert FORNECEDOR_EMAIL(CNPJ, email) values ("07530555000194", "alfredojaulas@outlook.com");
+insert FORNECEDOR_EMAIL(CNPJ, email) values ("08917962000111", "ultrafarma.farma@gmail.com");
+insert FORNECEDOR_EMAIL(CNPJ, email) values ("97429620000182", "haiz.frutas@gmail.com");
+insert FORNECEDOR_EMAIL(CNPJ, email) values ("96793493000133", "joaobosco@equipamento.vet.com");
+
+/* EXAME_ANIMAL */
+
+insert EXAME_ANIMAL(data_exam, veterinario, animal) values("2010-07-12", "75256732345", "F8420I25K8");
+insert EXAME_ANIMAL(data_exam, veterinario, animal) values("2021-01-28", "69535214606", "68306448J5");
+insert EXAME_ANIMAL(data_exam, veterinario, animal) values("2022-07-02", "65129976022", "S8X5LA03CR");
+insert EXAME_ANIMAL(data_exam, veterinario, animal) values("2022-05-12", "58756599949", "3461J17382");
+insert EXAME_ANIMAL(data_exam, veterinario, animal) values("2004-12-24", "21424074564", "32QGTNHP80");
+insert EXAME_ANIMAL(data_exam, veterinario, animal) values("2020-11-05", "65068305179", "14W4G81L60");
+insert EXAME_ANIMAL(data_exam, veterinario, animal) values("2018-02-17", "60962609123", "3U8X2YL04O");
+insert EXAME_ANIMAL(data_exam, veterinario, animal) values("2018-02-17", "46894747871", "3I61750241");
+
+/* ANIMAL_INTERNADO */
+
+insert(setor,animal,data_entr,data_saida)
+values("1201", "F8420I25K8", "2021-28-01", NULL
+)
+insert(setor,animal,data_entr,data_saida)
+values("1301", "68306448J5", "2010-12-07", NULL
+)
+insert(setor,animal,data_entr,data_saida)
+values("1303", "S8X5LA03CR", "2022-02-07", NULL
+)
+insert(setor,animal,data_entr,data_saida)
+values("1105", "3461J17382", "2022-12-05", NULL
+)
+insert(setor,animal,data_entr,data_saida)
+values("1301", "32QGTNHP80", "2004-24-12", NULL
+)
+insert(setor,animal,data_entr,data_saida)
+values("1305", "14W4G81L60", "2020-05-11", NULL
+)
+insert(setor,animal,data_entr,data_saida)
+values("1305", "3U8X2YL04O", "2018-17-02", NULL
+)
+insert(setor,animal,data_entr,data_saida)
+values("1301", "3I61750241", "2008-18-04", NULL
+)
+insert(setor,animal,data_entr,data_saida)
+values("1301", "6S32130145", "2020-30-01", NULL
+)
+insert(setor,animal,data_entr,data_saida)
+values("1303", "2E5Y77S550", "2022-24-05", NULL
+)
+insert(setor,animal,data_entr,data_saida)
+values("1603", "A5V5IVG0E0", "2011-06-04", NULL
+)
+insert(setor,animal,data_entr,data_saida)
+values("1604", "74CH07608D", "2022-12-04", NULL
+)
+insert(setor,animal,data_entr,data_saida)
+values("1604", "M261603122", "2011-15-03", NULL
+)
+insert(setor,animal,data_entr,data_saida)
+values("1102", "05W0NOY832", "2020-05-01", NULL
+)
+insert(setor,animal,data_entr,data_saida)
+values("1105", "UJ72152U1H", "2022-15-07", NULL
+)
+insert(setor,animal,data_entr,data_saida)
+values("1102", "08524L2187", "2012-17-05", NULL
+)
+insert(setor,animal,data_entr,data_saida)
+values("1201", "11J0X058LR", "2000-18-03", NULL
+)
+insert(setor,animal,data_entr,data_saida)
+values("1604", "S001410K26", "2022-15-08", NULL
+)
+insert(setor,animal,data_entr,data_saida)
+values("1604", "15FX04E60F", "2021-19-01", NULL
+)
+insert(setor,animal,data_entr,data_saida)
+values("1604", "N452322623", "2022-26-07", NULL
+)
+insert(setor,animal,data_entr,data_saida)
+values("1102", "P70554I0AM", "2021-01-03", "2021-02-02"
+)
+insert(setor,animal,data_entr,data_saida)
+values("1105", "M35027O253", "2010-28-08", "2010-12-10"
+)
+insert(setor,animal,data_entr,data_saida)
+values("1102", "I7L7837T5U", "2022-09-08", "2022-02-09"
+)
+insert(setor,animal,data_entr,data_saida)
+values("1105", "3461J17382", "2022-24-04", "2022-17-05"
+)
+insert(setor,animal,data_entr,data_saida)
+values("1204", "R14RQ8O886", "2005-7-12", "2005-5-12"
+)
+insert(setor,animal,data_entr,data_saida)
+values("1204", "I2256N2K52", "2022-10-11", "2022-16-11"
+)
+insert(setor,animal,data_entr,data_saida)
+values("1204", "M261603122", "2018-25-06", "2018-01-07"
+)
+insert(setor,animal,data_entr,data_saida)
+values("1102", "NTP764E45E", "2009-09-09", "2009-12-09"
+)
+insert(setor,animal,data_entr,data_saida)
+values("1102", "05W0NOY832", "2020-10-12", "2020-12-12"
+)
+insert(setor,animal,data_entr,data_saida)
+values("1304", "06LV43MR04", "2022-2-01", "2022-17-05"
+)
+insert(setor,animal,data_entr,data_saida)
+values("1304", "8267Y03574", "2012-10-02", "2012-16-02"
+)
+insert(setor,animal,data_entr,data_saida)
+values("1102", "45803578T7", "2011-2-08", "2011-2-08"
+)
+insert(setor,animal,data_entr,data_saida)
+values("1304", "05W0NOY832", "2022-2-01", "2022-15-02")
+
+/* ANIMAIS */
+
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("6DH5Y663K5", "2010-11-13", "saudável", "Caninus Lupus", "lobinho", "carnivoro", "temperado", Null
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("L48PCE5300", "2007-4-27", "saudável", "Hippopotamus amphibius", "Hipopótamo", "onívoro", "quente", `IHLJDRJURM`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("6CS4167N26", "2022-8-2", "saudável", "Leopardus pardalis", "Jaguatirica", "carnívoro", "quente", `VUYPUXJAZB`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("24HHY21O88", "2007-5-22", "DEFAULT", "Chrysocyon brachyurus", "Lobo guará", "carnívoro", "temperado", `DHLGWTQAWD`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("74CH07608D", "2006-8-9", "mórbido", "Panthera tigris", "Tigre", "carnívoro", "temperado", `RXHRFGDGLO`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("J514084851", "2021-3-13", "saudável", "Bubalus", "Búfalo", "herbívoro", "quente", `TETZVZOOFR`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("5307438347", "2021-11-28", "saudável", "Boa constrictor", "Jiboia", "carnívoro", "temperado", `MELQHANYVP`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("F8420I25K8", "1999-3-21", "enfermo", "Lynx", "Lince", "carnívoro", "temperado", Null
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("68306448J5", "1998-6-21", "enfermo", "Panthera onca", "Onça pintada", "carnívoro", "temperado", Null
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("S8X5LA03CR", "2010-6-14", "enfermo", "Hippopotamus amphibius", "Hipopótamo", "onívoro", "quente", Null
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("41O538F355", "2010-1-11", "saudável", "Hyaenidae", "Hiena", "carnívoro", "temperado", `WDGBAMCIQB`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("32QGTNHP80", "2014-1-26", "enfermo", "Lynx", "Lince", "carnívoro", "temperado", Null
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("7383EC1380", "1998-8-6", "saudável", "Equus zebra", "Zebra", "herbívoro", "temperado", `UZEAMZNXAN`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("P70554I0AM", "2018-3-6", "saudável", "Chrysocyon brachyurus", "Lobo guará", "carnívoro", "temperado", `EZACYYNISU`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("3B0352X5I7", "2022-9-9", "saudável", "Hydrochoerus hydrochaeris", "Capivara", "herbívoro", "aquático", `FVSXYSBZNQ`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("6STK3UUNLU", "2014-11-24", "saudável", "Ursus maritimus", "Urso polar", "onívoro", "frio", `OXFUQXXTGV`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("14W4G81L60", "2013-1-16", "enfermo", "Lynx", "Lince", "carnívoro", "temperado", Null
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("3W0OGC27U0", "2021-9-26", "saudável", "Hippopotamus amphibius", "Hipopótamo", "onívoro", "quente", `MJGFTHGOJS`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("04S3H7F67K", "2005-12-26", "DEFAULT", "Bubalus", "Búfalo", "herbívoro", "quente", `TETZVZOOFR`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("XT2O65QV64", "2005-1-21", "saudável", "Canis latrans", "Coiote", "carnívoro", "temperado", `CFVJBWQYJX`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("VL1KIL106P", "2010-11-23", "saudável", "Macropus rufus", "Canguru vermelho", "herbívoro", "quente", `VDDFYLAMZV`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("M35027O253", "2005-10-22", "saudável", "Inia geoffrensis", "Boto cor de rosa", "peixivoro", "aquático", `URUMXODBTH`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("351756I505", "2015-7-29", "saudável", "Macropus rufus", "Canguru vermelho", "herbívoro", "quente", `HXIXSRZMYD`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("A0627B11D3", "2021-7-11", "saudável", "Chiroptera", "Morcego", "onívoro", "temperado", `POYKKGLRTP`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("7J77C30002", "2003-1-9", "saudável", "Haliaetus leucocephalus", "Águia de cabeça branca", "carnívoro", "temperado", `JPGICPVWWH`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("6X35843818", "2016-9-9", "saudável", "Panthera onca", "Onça pintada", "carnívoro", "temperado", `ZDVRGKWSHK`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("NTP764E45E", "2005-6-1", "saudável", "Leopardus pardalis", "Jaguatirica", "carnívoro", "quente", `THDRHUABEV`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("6523R0E8YI", "2021-12-17", "saudável", "Chiroptera", "Morcego", "onívoro", "temperado", `KYTDNXRCTH`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("U3O006U653", "2020-10-2", "saudável", "Haliaetus leucocephalus", "Águia de cabeça branca", "carnívoro", "temperado", `JPGICPVWWH`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("IIL15H37SS", "2005-11-2", "saudável", "Boa constrictor", "Jiboia", "carnívoro", "temperado", `OQMGEHZRRG`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("I7L7837T5U", "2013-10-26", "saudável", "Phascolarctos cinereus", "Coala", "herbívoro", "quente", `PTDNZUENPG`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("3U8X2YL04O", "2005-10-22", "enfermo", "Leopardus pardalis", "Jaguatirica", "carnívoro", "quente", Null
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("0OG5U2V536", "2001-11-24", "DEFAULT", "Manis pentadactyla", "Pangolim chinês", "onívoro", "temperado", `DEARFJQZAI`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("UEY7A5502D", "2021-3-18", "saudável", "Sus scrofa", "Javali", "onívoro", "Temperado", `TEJAGKPHLM`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("6RA6MY6603", "2002-4-10", "DEFAULT", "Giraffa", "Girafa", "herbívoro", "quente", `EZUMVXICDS`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("M261603122", "2018-9-12", "mórbido", "Coragyps atratus", "Urubu de cabeça preta", "carniceiro", "temperado", `KZDUDCQEOU`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("3461J17382", "1999-12-27", "saudável", "Bubalus", "Búfalo", "herbívoro", "quente", `ILYAXWQZDK`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("3YTMWQ0G85", "2004-9-1", "saudável", "Leopardus pardalis", "Jaguatirica", "carnívoro", "quente", `ANVWQWPXYT`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("3I61750241", "2002-10-4", "enfermo", "Giraffa", "Girafa", "herbívoro", "quente", Null
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("8724E047O0", "2016-11-14", "saudável", "Ursus maritimus", "Urso polar", "onívoro", "frio", `TQPEGWXCYV`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("QAY126C7D0", "2006-9-10", "saudável", "Hyaenidae", "Hiena", "carnívoro", "temperado", `IWQXWMKTBW`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("I5341S44X3", "2010-11-2", "saudável", "Phascolarctos cinereus", "Coala", "herbívoro", "quente", `NQPBFXEHGP`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("R14RQ8O886", "2000-7-4", "saudável", "Giraffa", "Girafa", "herbívoro", "quente", `BWHIALZRBB`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("5265V4U534", "2003-12-25", "saudável", "Hydrochoerus hydrochaeris", "Capivara", "herbívoro", "aquático", `SXLXRAVMQE`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("S001410K26", "2015-11-16", "mórbido", "Sus scrofa", "Javali", "onívoro", "Temperado", `FLTJREKWRX`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("1VB654O1V4", "2012-12-14", "saudável", "Lynx", "Lince", "carnívoro", "temperado", `KBWQNIRNZZ`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("1K2327TM46", "2017-8-29", "saudável", "Equus zebra", "Zebra", "herbívoro", "temperado", `HHGLOZQUDW`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("I2256N2K52", "2014-4-4", "saudável", "Pelecanus", "Pelicano", "Carnívoro", "aquático", `THGMZTSIDB`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("45803578T7", "2004-12-12", "saudável", "Bubalus", "Búfalo", "herbívoro", "quente", `BVEVLDUUGA`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("15FX04E60F", "2008-1-25", "mórbido", "Chrysocyon brachyurus", "Lobo guará", "carnívoro", "temperado", `DHLGWTQAWD`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("V41H5460L5", "2015-7-25", "saudável", "Manis pentadactyla", "Pangolim chinês", "onívoro", "temperado", `UGDFSKWZRQ`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("3U652C1772", "2015-2-7", "saudável", "Haliaetus leucocephalus", "Águia de cabeça branca", "carnívoro", "temperado", `AWGKBAJRFQ`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("8267Y03574", "2003-6-25", "saudável", "Coendou prehensilis", "Porco espinho", "frutífero", "temperado", `WWQQNSJWVQ`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("6S32130145", "2008-7-2", "enfermo", "Bubalus", "Búfalo", "herbívoro", "quente", Null
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("KRQ63152U2", "2000-11-13", "DEFAULT", "Myrmecophaga tridactyla", "Tamanduá bandeira", "insectívoro", "quente", `WSSCNMTLHC`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("A8516BU7M3", "2006-4-6", "saudável", "Equus zebra", "Zebra", "herbívoro", "temperado", `UZEAMZNXAN`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("7HX2UR5611", "2001-5-22", "DEFAULT", "Macropus rufus", "Canguru vermelho", "herbívoro", "quente", `AAOILQDASH`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("N452322623", "2005-5-20", "mórbido", "Pelecanus", "Pelicano", "Carnívoro", "aquático", `OFORHMUICA`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("2E5Y77S550", "2020-11-20", "enfermo", "Ursus maritimus", "Urso polar", "onívoro", "frio", Null
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("K48682837S", "2021-5-3", "saudável", "Phascolarctos cinereus", "Coala", "herbívoro", "quente", `APLEOUASAG`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("06LV43MR04", "2022-6-4", "saudável", "Tapirus terrestris", "Anta", "herbívoro", "temperado", `FDJUYIMSUY`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("074152F8SJ", "2008-7-21", "saudável", "Pteronura brasiliensis", "Ariranha", "onívoro", "aquático", `QFLPIHDGNC`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("34B08S2548", "2014-3-16", "saudável", "Ursus maritimus", "Urso polar", "onívoro", "frio", `PKKPZHRYSC`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("0N20382588", "2010-1-11", "saudável", "Ursus maritimus", "Urso polar", "onívoro", "frio", `DCAZGJVPMJ`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("735B65E54M", "2020-3-28", "saudável", "Manis pentadactyla", "Pangolim chinês", "onívoro", "temperado", `UGDFSKWZRQ`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("0ND25G6YUL", "2006-10-1", "saudável", "Tapirus terrestris", "Anta", "herbívoro", "temperado", `BGURSDPASI`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("7K3177EJC2", "2016-1-10", "saudável", "Canis latrans", "Coiote", "carnívoro", "temperado", `WXRWRJQJRT`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("D8287H7704", "2013-3-19", "saudável", "Canis latrans", "Coiote", "carnívoro", "temperado", `CFVJBWQYJX`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("A5V5IVG0E0", "2012-11-10", "enfermo", "Canis latrans", "Coiote", "carnívoro", "temperado", Null
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("05W0NOY832", "2007-11-17", "enfermo", "Equus zebra", "Zebra", "herbívoro", "temperado", Null
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("UJ72152U1H", "2018-12-10", "enfermo", "Equus zebra", "Zebra", "herbívoro", "temperado", Null
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("3843A573T0", "1998-9-28", "saudável", "Ursus maritimus", "Urso polar", "onívoro", "frio", `VAWGOAEZIH`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("0614B54E51", "2008-6-10", "saudável", "Phascolarctos cinereus", "Coala", "herbívoro", "quente", `APLEOUASAG`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("08524L2187", "2005-6-5", "enfermo", "Leopardus pardalis", "Jaguatirica", "carnívoro", "quente", Null
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("2M175UV26S", "2014-10-24", "saudável", "Lynx", "Lince", "carnívoro", "temperado", `KBWQNIRNZZ`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("11J0X058LR", "2008-9-8", "enfermo", "Hydrochoerus hydrochaeris", "Capivara", "herbívoro", "aquático", Null
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("88X6612617", "2011-5-25", "saudável", "Panthera tigris", "Tigre", "carnívoro", "temperado", `RXHRFGDGLO`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("D46X4G3N57", "2013-5-5", "DEFAULT", "Hydrochoerus hydrochaeris", "Capivara", "herbívoro", "aquático", `KOCIISRBFF`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("770005EWO3", "2002-10-16", "saudável", "Hydrochoerus hydrochaeris", "Capivara", "herbívoro", "aquático", `XLDBUKVVNM`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("2QLT05P1Q3", "2022-10-26", "saudável", "Carcharodon carcharias", "Tubarão branco", "carnívoro", "aquático", `BIGKQLNQSB`
+);
+insert ANIMAL(ID,data_cheg,nome_cien,nome_popu,alimentacao,clima_adap,habitat);
+values("QQ6385544A", "2007-10-28", "saudável", "Hyaenidae", "Hiena", "carnívoro", "temperado", `IWQXWMKTBW`);
+
+/* ALAS CLÍNICAS */
+
+insert ALA_CLINICA(setor_nume,alas_livre) values(1101,20);
+insert ALA_CLINICA(setor_nume,alas_livre) values(1102,20);
+insert ALA_CLINICA(setor_nume,alas_livre) values(1103,20);
+insert ALA_CLINICA(setor_nume,alas_livre) values(1104,20);
+insert ALA_CLINICA(setor_nume,alas_livre) values(1105,20);
