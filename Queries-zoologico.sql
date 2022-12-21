@@ -35,6 +35,65 @@ WHERE concl_supe BETWEEN 1990 AND 2000;
 SELECT FROM FUNCIONARIO
 WHERE salario NOT BETWEEN 1500 AND 2000;
 
+/*
+5. Mostre projetos de pesquisa onde não existe subtitulo
+*/
+
+SELECT FROM PROJETO_PESQUISA
+WHERE subtitulo IS NULL;
+
+/*
+5. Mostre apenas projetos com datas
+*/
+
+SELECT FROM DESENVOLVIMENTO_PROJETO
+WHERE data_final IS NOT NULL;
+
+/*
+6. Mostre apenas os animais inciados com a letra "a"
+*/
+
+SELECT FROM ANIMAL
+WHERE nome_popu LIKE 'a%';
+
+/*
+6. Mostre apenas os vistantes de paises que nao começam com a letra "a"
+*/
+
+SELECT FROM VISITANTE
+WHERE pais_orig NOT LIKE 'a%';
+
+/*
+7.Seleciona a media de quais os tipos de recursos amazenados
+*/
+SELECT AVG(tipo)
+FROM RECURSO_ARMAZENADO;
+
+
+/*
+7.Mostra onde a quantidade de fornecedores é menor que 10 
+*/
+
+SELECT FROM RECURSO_ARMAZENADO
+HAVING COUNT(quant_forn) > 10;
+
+/*
+7.Mostra onde a quantidade de fornecedores é menor que 10 
+*/
+
+/*
+8. consulta os visitantes e pesquisadores com cpf igual
+*/
+SELECT PESQUISADORES.cpf, VISITANTES.cpf
+FROM VISITANTES
+INNER JOIN PESQUISADORES ON PESQUISADORES.cpf  = VISTIANTES.cpf;
+
+
+
+
+
+
+
 
 
 
