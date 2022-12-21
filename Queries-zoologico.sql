@@ -71,7 +71,7 @@ FROM RECURSO_ARMAZENADO;
 
 
 /*
-7.Mostra onde a quantidade de fornecedores é menor que 10 
+7.Mostre onde a quantidade de fornecedores é menor que 10 
 */
 
 SELECT FROM RECURSO_ARMAZENADO
@@ -79,19 +79,9 @@ HAVING COUNT(quant_forn) > 10;
 
 
 /*
-8. consulta os visitantes e pesquisadores com cpf igual
+8. consulta os visitantes que também são pesquisadores
 */
-SELECT PESQUISADORES.cpf, VISITANTES.cpf
-FROM VISITANTES
-INNER JOIN PESQUISADORES ON PESQUISADORES.cpf  = VISTIANTES.cpf;
 
-
-
-
-
-
-
-
-
-
-
+SELECT P.cpf, V.cpf 
+FROM VISITANTES V INNER JOIN PESQUISADORES S
+ON P.cpf  = V.cpf;
