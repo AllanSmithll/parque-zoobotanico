@@ -29,6 +29,13 @@ WHERE esta_prov NOT IN ('Bahia');
 */
 SELECT FROM PESQUISADOR 
 WHERE concl_supe BETWEEN 1990 AND 2000;
+/*
+4. Retorna os funcionarios cujo salario não está entre 1500 à 2000
+*/
+SELECT FROM FUNCIONARIO
+WHERE salario NOT BETWEEN 1500 AND 2000;
+
+
 
 
 
