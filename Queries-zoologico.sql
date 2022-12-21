@@ -77,9 +77,6 @@ FROM RECURSO_ARMAZENADO;
 SELECT FROM RECURSO_ARMAZENADO
 HAVING COUNT(quant_forn) > 10;
 
-/*
-7.Mostra onde a quantidade de fornecedores é menor que 10 
-*/
 
 /*
 8. consulta os visitantes e pesquisadores com cpf igual
