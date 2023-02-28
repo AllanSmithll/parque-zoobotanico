@@ -1,315 +1,4 @@
-CREATE DATABASE IF NOT EXISTS ZOOLOGICO;
-USE ZOOLOGICO;
-
-/* tabela VISITANTE */ 
-CREATE TABLE IF NOT EXISTS VISITANTE
-(
-CPF		char(11)		    NOT NULL,
-RG		char(7)		        NOT NULL,	
-nome		varchar(30)		NOT NULL,
-genero      char(1)	    	NULL        DEFAULT 'M',
-email		varchar(35)		NULL,
-data_nasc	date			NOT NULL,
-pais_orig	varchar(25)		NOT NULL    DEFAULT 'BRASIL',
-esta_prov	varchar(45)		NOT NULL    DEFAULT 'PARAÍBA',
-cidade	varchar(45)		NOT NULL        DEFAULT 'SÃO MIGUEL DO TAIPU',
-
-CONSTRAINT	PRIMARY KEY (CPF)
-);
-
-/* tabela TELEFONE-VISITANTE */
-CREATE TABLE IF NOT EXISTS TELEFONE_VISITANTE (
-CPF	char(11)		NOT NULL,
-numero	char(14)		NOT NULL,
-
-CONSTRAINT	PRIMARY KEY (CPF, numero),
-CONSTRAINT 	FOREIGN KEY (CPF) REFERENCES VISITANTE(CPF)
-);
-
-/* tabela INGRESSO */ 
-
-/* tabela INGRESSO_CATALAGO */ 
-CREATE TABLE IF NOT EXISTS INGRESSO_CATALAGO
-(
-tipo_id		int(1)		NOT NULL AUTO_INCREMENT,
-tipo_nome   varchar(20) NOT NULL,
-preco		decimal(4,2)NOT NULL,	
-area_perm	text		NOT NULL,
-cor		    varchar(13)	NOT NULL,
-
-CONSTRAINT	PRIMARY KEY (tipo_id)
-);
-
-/* tabela INGRESSO_DISPONIVEL */ 
-CREATE TABLE IF NOT EXISTS INGRESSO_DISPONIVEL
-(
-ID   	    char(8)	    NOT NULL,
-tipo		INT(1)      NOT NULL,
-
-CONSTRAINT	PRIMARY KEY (ID),
-CONSTRAINT	FOREIGN KEY (tipo) REFERENCES INGRESSO_CATALAGO(tipo_id)
-);
-
-/* tabela PESQUISADOR */ 
-
-CREATE TABLE IF NOT EXISTS PESQUISADOR
-(
-CPF	            char(11)		NOT NULL,
-nume_id_cart	char(8)		    NOT NULL,	
-instituicao		VARCHAR(45)		NULL,
-grad_acad		varchar(30)		NULL,
-concl_supe  	YEAR    	    NULL,
-
-CONSTRAINT	PRIMARY KEY (CPF),
-CONSTRAINT 	UNIQUE (nume_id_cart),
-CONSTRAINT 	FOREIGN KEY (CPF) REFERENCES VISITANTE(CPF)
-);
-
-
-/* tabela PROJETO_PESQUISA*/ 
-
-CREATE TABLE IF NOT EXISTS PROJETO_PESQUISA
-(
-ID		    char(8)		    NOT NULL,
-titulo		varchar(45)		NOT NULL,	
-subtitulo	text		    NULL,
-
-CONSTRAINT	PRIMARY KEY (ID)
-);
-
-/* tabela DESENVOLVIMENTO_PROJETO*/ 
-
-CREATE TABLE IF NOT EXISTS DESENVOLVIMENTO_PROJETO
-(
-cod_proj		char(8)		    NOT NULL,
-pesquisador		char(11)		NOT NULL,
-data_inicio		date			NOT NULL,	
-data_final		date			NULL,
-
-CONSTRAINT	PRIMARY KEY (cod_proj, pesquisador, data_inicio),
-CONSTRAINT	FOREIGN KEY (pesquisador) REFERENCES PESQUISADOR(CPF),
-CONSTRAINT	FOREIGN KEY (cod_proj) REFERENCES PROJETO_PESQUISA(ID)
-);
-
-/* tabela HABITAT*/ 
-
-CREATE TABLE IF NOT EXISTS HABITAT
-(
-ID              char(10)		NOT NULL,
-fosso			boolean			NOT NULL,	
-tipo_solo		varchar(25)		NOT NULL DEFAULT 'GRAMA',
-arvore_quant    tinyint  		NOT NULL DEFAULT 0 ,
-
-CONSTRAINT	PRIMARY KEY (ID)
-);
-
-/* tabela ANIMAL*/
-
-CREATE TABLE IF NOT EXISTS ANIMAL
-(
-ID		        char(10)		NOT NULL AUTO_INCREMENT,
-data_cheg		date			NOT NULL,
-saude			varchar(15)		NOT NULL DEFAULT 'SAUDÁVEL',
-nome_cien		varchar(35)		NOT NULL,	
-nome_popu		varchar(30)		NULL,
-alimentacao		varchar(25)		NOT NULL,
-clima_adap		varchar(15)		NOT NULL,
-habitat 		char(10)		NULL,
-
-CONSTRAINT	PRIMARY KEY (ID),
-CONSTRAINT	FOREIGN KEY (habitat) REFERENCES HABITAT(ID)
-);
-
-/* tabela ALA_CLINICA*/ 
-
-CREATE TABLE IF NOT EXISTS ALA_CLINICA
-(
-setor_nume		int(4)		NOT NULL,
-alas_livre  	int(2)		NOT NULL DEFAULT 10,
-
-CONSTRAINT	PRIMARY KEY (setor_nume)
-);
-
-/* tabela INTERNACOES*/ 
-
-CREATE TABLE IF NOT EXISTS ANIMAL_INTERNACAO
-(
-setor_nume		int(4)		    NOT NULL AUTO_INCREMENT,
-animal		    char(10)		NOT NULL,
-data_entr		date			NOT NULL,
-data_saida		date			NULL,
-
-CONSTRAINT	PRIMARY KEY(setor_nume, animal, data_entr),
-CONSTRAINT	FOREIGN KEY(setor_nume)	REFERENCES	ALA_CLINICA(setor_nume),
-CONSTRAINT	FOREIGN KEY(animal)	REFERENCES ANIMAL(ID)
-);
-
-/* tabela FUNCIONARIO */ 
-CREATE TABLE IF NOT EXISTS FUNCIONARIO
-(
-matricula	char(8)         NOT NULL,
-CPF		    char(11)		NOT NULL,	
-nome		varchar(30)		NOT NULL,
-funcao	    varchar(20)		NOT NULL,
-salario		decimal			NOT NULL,
-CNH		    char(10)		NULL,
-gerente	    char(8)		    NULL,
-CEP		    char(8)		    NOT NULL,
-rua		    varchar(45)		NOT NULL,
-bairro	    varchar(45)		NOT NULL,
-cidade      varchar(45)     NOT NULL DEFAULT 'SÃO MIGUEL DO TAIPU',
-
-CONSTRAINT	PRIMARY KEY(matricula),
-CONSTRAINT	UNIQUE (CPF),
-CONSTRAINT	FOREIGN KEY(gerente)	REFERENCES FUNCIONARIO(matricula)
-);
-
-/* tabela TELEFONE_FUNC*/
-CREATE TABLE IF NOT EXISTS TELEFONE_FUNC
-(
-funcionario	char(8)		    NOT NULL,
-numero	    char(14)		NOT NULL,
-
-CONSTRAINT	PRIMARY KEY (funcionario, numero),
-CONSTRAINT 	FOREIGN KEY (funcionario) REFERENCES FUNCIONARIO(matricula)
-);
-
-/* tabela VETERINARIO */ 
-
-CREATE TABLE IF NOT EXISTS VETERINARIO
-(
-matricula		char(8)		NOT NULL,
-CRMV			char(8)		NOT NULL,
-setor_resp		int(2)		NULL,	
-
-CONSTRAINT	PRIMARY KEY (matricula),
-CONSTRAINT 	UNIQUE (CRMV),
-CONSTRAINT 	FOREIGN KEY (matricula) REFERENCES FUNCIONARIO(matricula)
-);
-
-/* tabela INGRESSOS_COMPRADOS*/
-CREATE TABLE IF NOT EXISTS INGRESSOS_COMPRADOS
-(
-id_compra		char(11)		NOT NULL,
-comprador		CHAR(11)		NOT NULL,
-ingresso		char(8)		    NOT NULL,
-auxiliador_func	char(8)		    NULL,
-data_compra		date			NOT NULL,
-
-CONSTRAINT	PRIMARY KEY (id_compra),
-CONSTRAINT 	FOREIGN KEY (auxiliador_func)   REFERENCES FUNCIONARIO(matricula),
-CONSTRAINT 	FOREIGN KEY (comprador)         REFERENCES VISITANTE(CPF),
-CONSTRAINT 	FOREIGN KEY (ingresso) 		    REFERENCES INGRESSO_DISPONIVEL(ID)
-);
-
-/* tabela FORNECEDOR*/
-CREATE TABLE IF NOT EXISTS FORNECEDOR
-(
-CNPJ		char(14)		NOT NULL,
-ENDERECO	VARchar(45)		NOT NULL,
-nome_fant	varchar(45)		NOT NULL,
-
-CONSTRAINT	PRIMARY KEY (CNPJ)
-);
-
-/* tabela FORNECEDOR_EMAIL*/
-CREATE TABLE IF NOT EXISTS FORNECEDOR_EMAIL
-(
-CNPJ		char(14)		NOT NULL,
-email		VARchar(45)		NOT NULL,
-
-CONSTRAINT	PRIMARY KEY (CNPJ, email),
-CONSTRAINT FOREIGN KEY (CNPJ) REFERENCES FORNECEDOR(CNPJ)
-);
-
-/* tabela RECURSO_ARMAZENADO */ 
-CREATE TABLE IF NOT EXISTS RECURSO_ARMAZENADO
-(
-id  		char(10)      	NOT NULL,
-Forn_CNPJ	char(14)		NOT NULL,	
-nome		varchar(30)		NOT NULL,
-quant_estoq decimal  		Not NULL DEFAULT 0,
-unidade	    varchar(5)  	NULL DEFAULT 'KG',
-tipo		varchar(25)		NOT NULL,
-data_compra	date			NOT NULL,
-data_vali	date			NOT NULL,
-quant_forn	decimal		    NOT NULL ,
-setor		char(5)		    NOT NULL,
-nume_galpao	int(4)		    NULL,
-codi_prat	char(5)		    NULL,
-
-CONSTRAINT	PRIMARY KEY (id),
-CONSTRAINT FOREIGN KEY (Forn_CNPJ) REFERENCES FORNECEDOR(CNPJ)
-);
-
-/* tabela MANUNTENCAO_HABITAT*/
-CREATE TABLE IF NOT EXISTS MANUNTECAO_HABITAT
-(
-habitat 	char(10)	NOT NULL,
-funcionario	char(8)	    NOT NULL,
-data_inicio	datetime	NOT NULL,
-data_final	datetime	NULL,	
-descricao	text	    NOT NULL,
-
-CONSTRAINT PRIMARY KEY (habitat , funcionario, data_inicio),
-CONSTRAINT FOREIGN KEY (habitat) REFERENCES HABITAT(ID),
-CONSTRAINT FOREIGN KEY (funcionario) REFERENCES FUNCIONARIO(matricula)
-);
-
-/* tabela EXAME_ANIMAL*/
-CREATE TABLE IF NOT EXISTS EXAME_ANIMAL
-(
-data_exam	datetime	NOT NULL,
-veterinario	char(8)	    NOT NULL,
-animal	    char(10)	NOT NULL,
-
-CONSTRAINT PRIMARY KEY (data_exam, veterinario, animal),
-CONSTRAINT FOREIGN KEY (veterinario) REFERENCES VETERINARIO(matricula),
-CONSTRAINT FOREIGN KEY (animal)      REFERENCES ANIMAL(ID)
-);
-
-/* tabela PRESCRICAO_EXAME*/
-CREATE TABLE IF NOT EXISTS PRESCRICAO_EXAME
-(
-data_exam	datetime	NOT NULL,
-veterinario	char(8)	    NOT NULL,
-animal	    char(10)	NOT NULL,
-remedio 	char(8)	    NOT NULL,
-
-CONSTRAINT PRIMARY KEY (data_exam, veterinario, animal, remedio),
-
-CONSTRAINT FOREIGN KEY (veterinario, animal, data_exam)    REFERENCES EXAME_ANIMAL(veterinario, animal, data_exam),
-
-CONSTRAINT FOREIGN KEY (REMEDIO)        REFERENCES RECURSO_ARMAZENADO(id)
-);
-
-ALTER TABLE VISITANTE   ADD CONSTRAINT gen_check CHECK (genero='M' or genero='F');
-ALTER TABLE VISITANTE   ADD CONSTRAINT mail_VISITANTE_check CHECK (email like '%@%.%');
-
-ALTER TABLE INGRESSO_CATALAGO   ADD CONSTRAINT preco_check CHECK (preco >=0);
-ALTER TABLE INGRESSO_CATALAGO   ADD CONSTRAINT cor_check CHECK (cor in ('AZUL','VERDE',"AMARELO",'VERMELHO','PÚRPURA'));
-
-ALTER TABLE PESQUISADOR   ADD CONSTRAINT graduacao_check CHECK (grad_acad in ('TECNOLÓGO','BACHARELADO','MESTRADO','DOUTORADO'));
-
-ALTER TABLE HABITAT   ADD CONSTRAINT arvores_check CHECK (arvore_quant >=0);
-
-ALTER TABLE ANIMAL   ADD CONSTRAINT saude_check CHECK (saude in ('SAUDÁVEL','ENFERMO','MORIBUNDO','MORTO'));
-
-ALTER TABLE ALA_CLINICA   ADD CONSTRAINT setor_check CHECK (setor_nume >0);
-ALTER TABLE ALA_CLINICA   ADD CONSTRAINT alas_livre_check CHECK (alas_livre >=0);
-
-ALTER TABLE FUNCIONARIO   ADD CONSTRAINT salario_check CHECK (salario >0);
-
-ALTER TABLE FORNECEDOR_EMAIL  ADD CONSTRAINT mail_FORNECEDOR_check CHECK (email like '%@%.%');
-
-ALTER TABLE RECURSO_ARMAZENADO   ADD CONSTRAINT quant_estoq_check CHECK (quant_estoq > 0);
-ALTER TABLE RECURSO_ARMAZENADO   ADD CONSTRAINT quant_forn_check CHECK (quant_forn >0);
-ALTER TABLE RECURSO_ARMAZENADO   ADD CONSTRAINT nume_galpao_check CHECK (nume_galpao >0)
-
-/* Inserções */
-
-/* VISITANTE */
-
+/* tabela VISITANTE*/ 
 INSERT VISITANTE(CPF, RG, nome,genero,email,data_nasc,pais_orig,esta_prov,cidade) values('11914755308', '1191475',	'Melvin',	'M',	'MelvinSConway@einrot.com',	"5/18/2003",	DEFAULT,	"Santa Catarina",	"Florianópolis"
 )
 
@@ -463,189 +152,427 @@ INSERT VISITANTE(CPF, RG, nome,genero,email,data_nasc,pais_orig,esta_prov,cidade
 );
 INSERT VISITANTE(CPF, RG, nome,genero,email,data_nasc,pais_orig,esta_prov,cidade) values('10670004294', '1067000',	'Jane',	'F',	'JaneKHogan@superrito.com',	"7/28/1970",	DEFAULT,	"Goiás",	"Goiás",
 );
-INSERT VISITANTE(CPF, RG, nome,genero,email,data_nasc,pais_orig,esta_prov,cidade) values('76596456412', '7659645',	'Christopher',	'M',	'ChristopherRMcClary@gustr.com',	"9/12/1980",	DEFAULT,	DEFAULT,	DEFAULT,)
+INSERT VISITANTE(CPF, RG, nome,genero,email,data_nasc,pais_orig,esta_prov,cidade) values('76596456412', '7659645',	'Christopher',	'M',	'ChristopherRMcClary@gustr.com',	"9/12/1980",	DEFAULT,	DEFAULT,	DEFAULT,);
+/* TELEFONE_VISITANTE */
 
-/* RECURSO_ARMAZENADO */
+INSERT TELEFONE_VISITANTE (cpf, numero) 
+VALUES ('39737807076','11914755308'
+);
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('45669669586','64482378798'
+);
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('71743496272','23156909432'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('42905148515','24344841158'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('38403993117','76426078735'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('33826241425','97723581319'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('94851704221','52107813647'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('29063368856','67781375505'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('26230819756','23940071501'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('80454664397','63612908405'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('52608859657','54052700597'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('23996634923','71106412443'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('60712352481','11581721927'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('44393347452','41497522498'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('16418833793','44028157706'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('92655303890','55537846543'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('32219335561','83668066850'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('48417459271','99288674101'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('91588916538','98503973901'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('23483887807','64603661010'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('20046379603','67926064726'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('84157170344','95385258415'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('80729473866','48949340860' 
+);
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('83136895134','96837117408'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('93470417043','49879959485'
+);
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('45585070329','93417036542'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('79197803346','34228058507'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('26271122581','47994960006'
+);
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('70003113894','29934345781'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('54832333163','38661444829'
+);
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES '52371195130','58623066251' 
+);
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('80419552695','60590923145' 
+);
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('87527669698','51218481706'
+);
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('92472121664','71945058609'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('61648753715','50914287630' 
+);
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('14720724945','72313085708' 
+);
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('51631651412','37353265523' 
+);
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('79332903674','57095314802' 
+);
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('48846341462','31295917025'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('36024292035','13725158282'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('90108633536','87940104047'
+);
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('40640614155','67584336841'
+);
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('93187239657','43335280032'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('22971969090','96981046407'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('40967010019','90320237729'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('69665851162','94684010228'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('66767180099','35860652569'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('15638664795','53852974534'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('71044369787','83943706168'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('48649743845','14375303549'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('55711253527','86063755861' 
+);
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('27936501080','63782435818'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('82267577075','60159197287' 
+);
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('51007837430','79889368919'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('59673380819','73648130048'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('20340499554','51833500350'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('19765484135','53220781187'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('62134500556','33530650757'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('31201514573','84251814100'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('86021811123','47867205268'
+);
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('44089314104','93298973122'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('31289653676','80247071102'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('95822094190','26618488354'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('27234186452','40113187106'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('13272774061','16950339496' 
+);
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('77196909606','12683202261' 
+);
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('74782908084','10181769930'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('54512151036','94567438450'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('95092417520','97084191097'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('65530981465','63979484807' 
+);
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('67181603819','13921434386'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('36867546940','68285106403' 
+);
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('83847547009','40351060979'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('38338158046','39496798551'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('33867185448','57423634948'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('69248334386','10670004294'
+); 
+INSERT TELEFONE_VISITANTE (cpf, numero)
+VALUES ('63455403036','76596456412');
 
-insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("ALINDLPP", "75108761000160", "carne", 200.70, "KG", "Alimento", "13-12-2022", "10-02-2023", 500.00, "AA001", 1, "AAA01"
-);
-insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("MANBUBUS", "11661872000117", "tinta", 50.00, "l", "Manutenção", "02-10-2022", "02-10-2037", 120.00, 'BB001', 1, 'AAA01'
-);
-insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("LIMJINDJ", "08799660000113", "sabão", 100.00, "KG", "Limpeza", "15-12-2022", "15-12-2023", 200.00, "CC001", 1, "AAA01"
-);
-insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("JAUWUIWS", "07530555000194", "jaula", 13, "unid", "Jaula", "29-08-2022", "00-00-00", 20, "DD001", 1, "DDD01"
-);
-insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("FARIWWWX", "08917962000111", "analgésico", 12, "unid", "Fármaco", "10-12-2022", "10-12-2024", 20, "EE001", 1, "AAA01"
-);
-insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("FARDUWBQ", "08917962000111", "anti-inflamatório", 15, "unid", "Fármaco", "10-12-2022", "10-12-2023", 20, "EE001", 1, "AAA02"
-);
-insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("ALIWUHHO", "97429620000182", "penca de banana", 94, "unid", "Alimento", "20-12-2022", "27-12-2022", 150, "AA001", 1, "AAA02"
-);
-insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("VETQCMPI", "96793493000133", "vac antirábica", 7, "unid", "Veterinário", "15-12-2022", "22-12-2025", 15, "FF001", 1, "AAA01"
-);
-insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("VETDUIWW", "96793493000133", "anestésico", 16, "unid", "Veterinário", "12-11-2022", "22-12-2025", 20, "FF001", 1, "AAA01"
-);
-insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("PROWESDP", "37829203000132", "par de luvas", 34, "unid", "Mat. Profissa", "10-11-2022", "00-00-0000", 100, "GG001", 1, "AAA02"
-);
-insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("ALIWSPME", "75108761000160", "cacho de uvas", 82, "unid", "Alimento", "20-12-2022", "29-12-2022", "AA001", 1, "AAA03"
-);
-insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("MANXCMEA", "11661872000117", "ferramentas", 63, "unid", "Manutenção", "09-09-2021", "00-00-0000", "BB001", 1, "AAA02"
-);
-insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("LIMCNCWM", "08799660000113", "desinfetante", 14, "unid", "Limpeza", "10-12-2022", "10-12-2024", "CC001", 1, "AAA02"
-);
-insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("FAMCOWOW", "08917962000111", "antialérgico", 9, "unid", "Fármaco", "07-11-2022", "07-11-2024", 15, "EE001", 1, "AAA03"
-);
-insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("FAMNANAC", "08917962000111", "antibiótico", 11, "unid", "Fármaco", "08-10-2022", "08-10-2024", 25, "EE001", 1, "AAA04"
-);
-insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("ALISOWMD", "97429620000182", "manga", 20, "unid", "Alimento", "20-12-2022", "27-10-2022", 40, "AA001", 1, "AAA04"
-);
-insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("ALISOWMQ", "97429620000182", "maçã", 20, "unid", "Alimento", "20-12-2022", "27-10-2022", 40, "AA001", 1, "AAA05"
-);
-insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("FAREMOIC", "08917962000111", "cicatrizante", 28, "unid", "Fármaco", "19-12-2022", "19-12-2024", 45, "EE001", 1, "AAA05"
-);
-insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("FARWENIU", "08917962000111", "vermifungo", 30, "unid", "Fármaco", "19-12-2022", "19-12-2024", 45, "EE001", 1, "AAA06"
-);
-insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("LIMDOHDO", "08799660000113", "cloro", 13, "l", "Limpeza", "10-09-2022", "10-09-2024", 30, "CC001", 1, "AAA03"
-);
-insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("FARMPZEC", "08917962000111", "antitóxico", 20, "unid", "20-11-2022", "20-11-2024", 45, "EE001", 1, "AAA07"
-);
-insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("FARPNVWP", "08917962000111", "antitetânico", 26, "unid", "20-09-2022", "20-09-2024", 30, "EE001", 1, "AAA08"
-);
-insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("FAREWPWN", "08917962000111", "dexametasona", 28, "unid", "17-10-2022", "17-10-2024", 30, "EE001", 1, "AAA09"
-);
-insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("FARHQWQW", "08917962000111", "sulfamexazol", 29, "unid", "13-08-2022", "13-08-2024", 30, "EE001", 1, "AAA10");
 
 /* PROJETO_PESQUISADO */
 
 insert PROJETO_PESQUISA(ID,titulo,subtitulo)
+
 values("25444487", "Convivência de Humanos com animais",  null
-)
+);
 insert PROJETO_PESQUISA(ID,titulo,subtitulo)
+
 values("41215854", "importância na adaptação aos habitats", null
-)
+);
 insert PROJETO_PESQUISA(ID,titulo,subtitulo)
+
 values("11344774", "Ansiedade em animais silvestres",  "Tratando das causas"
-)
+);
 insert PROJETO_PESQUISA(ID,titulo,subtitulo)
+
 values("01744478", "Poluição sonora frente aos animais",  "Comportamento Animal"
-)
+);
 insert PROJETO_PESQUISA(ID,titulo,subtitulo)
+
 values("92475154", "Enfretamento a poluição",  "Impacto nos Animais"
-)
+);
 insert PROJETO_PESQUISA(ID,titulo,subtitulo)
+
 values("10414765", "Desenvolvimento sustentavél", null
-)
+);
 insert PROJETO_PESQUISA(ID,titulo,subtitulo)
+
 values("14875434", "Alimentação inadequada por visitantes", "E como enfrentar"
-)
+);
 insert PROJETO_PESQUISA(ID,titulo,subtitulo)
+
 values("68955794", "A influência Da vegetação",   "E beneficios dela" 
-)
+);
 insert PROJETO_PESQUISA(ID,titulo,subtitulo)
+
 values("35442851", "Causas de enfermidades em animais", null
-)
+);
 insert PROJETO_PESQUISA(ID,titulo,subtitulo)
+
 values("75145896", "O Conivio entre os animais",    "E como comportam-se")
 
-/* PROJETO DESENVOLVIDO */
+;/* PROJETO DESENVOLVIDO */
 
-insert(pesquisador,cod_proj,data_inicio,data_final) values("64482378798", "41215854","2012-04-10", "2013-05-12"
-)
-insert(pesquisador,cod_proj,data_inicio,data_final) values("11914755308", "25444487","2010-11-25", "2013-10-28"
-)
-insert(pesquisador,cod_proj,data_inicio,data_final) values("24344841158", "01744478","2017-02-01", "2018-10-25"
-)
-insert(pesquisador,cod_proj,data_inicio,data_final) values("23156909432", "11344774","2015-06-29", "2016-12-05"
-)
-insert(pesquisador,cod_proj,data_inicio,data_final) values("97723581319", "10414765","2010-10-10", "2011-05-16"
-)
-insert(pesquisador,cod_proj,data_inicio,data_final) values("76426078735", "92475154","2013-12-02", "2015-06-17"
-)
-insert(pesquisador,cod_proj,data_inicio,data_final) values("67781375505", "68955794","2014-06-05", "2016-12-12"
-)
-insert(pesquisador,cod_proj,data_inicio,data_final) values("52107813647", "14875434","2012-12-12", "2014-01-25"
-)
-insert(pesquisador,cod_proj,data_inicio,data_final) values("63612908405", "75145896","2011-08-20", "2013-01-10" 
-)
-insert(pesquisador,cod_proj,data_inicio,data_final) values("23940071501", "35442851" ,"2016-09-17", "2018-04-21")
+insert(pesquisador,cod_proj,data_inicio,data_final) 
+values("64482378798", "41215854","2012-04-10", "2013-05-12"
+);
+insert(pesquisador,cod_proj,data_inicio,data_final) 
+values("11914755308", "25444487","2010-11-25", "2013-10-28"
+);
+insert(pesquisador,cod_proj,data_inicio,data_final) 
+values("24344841158", "01744478","2017-02-01", "2018-10-25"
+);
+insert(pesquisador,cod_proj,data_inicio,data_final) 
+values("23156909432", "11344774","2015-06-29", "2016-12-05"
+);
+insert(pesquisador,cod_proj,data_inicio,data_final) 
+values("97723581319", "10414765","2010-10-10", "2011-05-16"
+);
+insert(pesquisador,cod_proj,data_inicio,data_final) 
+values("76426078735", "92475154","2013-12-02", "2015-06-17"
+);
+insert(pesquisador,cod_proj,data_inicio,data_final) 
+values("67781375505", "68955794","2014-06-05", "2016-12-12"
+);
+insert(pesquisador,cod_proj,data_inicio,data_final) 
+values("52107813647", "14875434","2012-12-12", "2014-01-25"
+);
+insert(pesquisador,cod_proj,data_inicio,data_final) 
+values("63612908405", "75145896","2011-08-20", "2013-01-10" 
+);
+insert(pesquisador,cod_proj,data_inicio,data_final) 
+values("23940071501", "35442851" ,"2016-09-17", "2018-04-21")
 
-/* PEQUISADOR */
+;/* PEQUISADOR */
 insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+
 values("64482378798", "99844114", "UFPB - Campus João Pessoa","Superior Completo - Bacharelado" , 2020
-)
+);
 insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+
 values("23156909432", "34141937", "IFPB - Campus João Pessoa","Ensino Médio completo",	         2018
-)
+);
 insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+
 values("24344841158", "66672372", "UERJ - Campus Maracanã",   "Superior Completo - Pós graduado", 2000
-)
+);
 insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+
 values("76426078735", "34309530", "IFPE - Campus Recife",     "Superior incompleto - Tecnólogo",    2022
-)
+);
 insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+
 values("97723581319", "63963130", "UFCG - Campus Cajazeiras", "Superior incompleto - Bachalerado",2005)
 insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+
 values("52107813647", "94079542", Null, Null, NULL
-)
+);
 insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+
 values("67781375505", "63998365", "UFMG - Campus Belo Horizonte", "Superior incompleto - Bachalerado", 2001
-)
+);
 insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+
 values("23940071501", "37983688", "UFMS - Campus Pantanal",    "Superior Completo - Pós graduado",   2000
-)
+);
 insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+
 values("63612908405", "79365839", "UFCG - Campus Cajazeiras",  "Superior Completo - Bachalerado",    2008
-)
+);
 insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+
 values("54052700597", "65981431", Null,Null,Null
-)
+);
 insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+
 values("71106412443", "15965869", "UFBA - Campus Salvador",    "Superior Completo - Tecnólogo",      2020
-)
+);
 insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+
 values("11581721927", "25797981", "UFSM - Campus Sachoeira Do Sul", "Superior Completo - Tecnólogo", 2021
-)
+);
 insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+
 values("41497522498", "76973274"  "UFSM - Campus Sachoeira Do Sul", "Superior incompleto - Bachalerado", Null
-)
+);
 insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+
 values("44028157706", "47628026", "UFBA - Campus Salvador",   "Superior incompleto - Pós graduado",      2007             
-)
+);
 insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+
 values("55537846543", "16623773", "UFSC - Campus Joinville",  "Superior Completo - Doutorado",      2004
-)
+);
 insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+
 values("83668066850", "88010090", "USP -  Campus São Carlos", "Superior Completo - Pós graduado",   2005                
-)
+);
 insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+
 values("99288674101", "98459854", "UFRJ - Campus Duque De Caxias", "Superior Completo - Doutorado", 1995
-)
+);
 insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+
 values("98503973901", "75655932", "UERJ - Campus Maracanã",    "Superior Completo - Pós graduado",  2018
-)
+);
 insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+
 values("64603661010", "18374189", "UFCG - Campus João Pessoa", "Superior Completo - Doutorado",   "2003"
-)
+);
 insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+
 values("67926064726", "15875125", "USP -  Campus São Carlos",  "Superior Completo - Tecnólogo",   2020
-)
+);
 insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+
 values("95385258415", "81647247", "UFRJ - Campus Duque De Caxias", "Superior Completo - Doutorado", "1985"
-)
+);
 insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+
 values("48949340860", "60874566", "UFPE - Campus Recife",    "Superior Completo - Bachalerado",  NULL
-)
+);
 insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+
 values("96837117408", "81417163", "UFC -  Campus Fortaleza", "Superior Completo - Doutorado",    "1986"
-)
+);
 insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
+
 values("49879959485", "20233883", "UFBA - Campus Salvador",  "Superior Completo - Doutorado",    "1998"
-)
+);
 insert PESQUISADOR( CPF,nume_id_cart,instituicao,grad_acad,concl_supe)
-values("93417036542", "11589966", "UFMG - Campus Belo Horizonte", "Superior Completo - Bachalerado", 2021)
+
+values("93417036542", "11589966", "UFMG - Campus Belo Horizonte", "Superior Completo - Bachalerado", 2021);
+
+
+
+/* INGRESSO_CATALOGO */
+
+insert (tipo_id,preco,area_perm,cor) values('ADULTO', '15.00', 'Áreas de lazer; Parte externa dos habitats e estufas;', 'AZUL');
+insert (tipo_id,preco,area_perm,cor) values('PESQUISADOR', '10.00', 'Áreas de lazer; Parte externa e interna dos habitats e estufas; Àreas de pesquisa e coleta de amostras;', 'VERDE');
+insert (tipo_id,preco,area_perm,cor) values('INFANTIL', '5.00', 'Áreas de lazer; Parte externa dos habitats e estufas; Praça infantil;', 'AMARELO');
+insert (tipo_id,preco,area_perm,cor) values('ESCOLAR', '3.50', 'Áreas de lazer; Parte externa dos habitats e estufas; Àreas de diversão extremas; Praça Infantil; Espaço na área de Amostra', 'VERMELHO');
+insert (tipo_id,preco,area_perm,cor) values('APRECIANTE DE COMIDA EXÓTICA', '0.00', 'Parte interna dos habitats e estufas; restaurante privado', 'PÚRPURA');
+
 
 /* INGRESSO_DISPONÍVEL */
-
 insert INGRESSO_DISPONIVEL(ID,tipo)
 values("84376803", 2);
 insert INGRESSO_DISPONIVEL(ID,tipo)
@@ -1011,14 +938,6 @@ INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_com
 INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("CH77826I516", "10670004294","WYL58V4O",NULL,"2022-12-18");
 INSERT INGRESSOS_COMPRADOS(id_compra,comprador,ingresso,auxiliador_func,data_compra) VALUES("180J0YF3W27", "76596456412","Q244686T",NULL,"2022-12-18");
 
-/* INGRESSO_CATALOGO */
-
-insert (tipo_id,preco,area_perm,cor) values('ADULTO', '15.00', 'Áreas de lazer; Parte externa dos habitats e estufas;', 'AZUL');
-insert (tipo_id,preco,area_perm,cor) values('PESQUISADOR', '10.00', 'Áreas de lazer; Parte externa e interna dos habitats e estufas; Àreas de pesquisa e coleta de amostras;', 'VERDE');
-insert (tipo_id,preco,area_perm,cor) values('INFANTIL', '5.00', 'Áreas de lazer; Parte externa dos habitats e estufas; Praça infantil;', 'AMARELO');
-insert (tipo_id,preco,area_perm,cor) values('ESCOLAR', '3.50', 'Áreas de lazer; Parte externa dos habitats e estufas; Àreas de diversão extremas; Praça Infantil; Espaço na área de Amostra', 'VERMELHO');
-insert (tipo_id,preco,area_perm,cor) values('APRECIANTE DE COMIDA EXÓTICA', '0.00', 'Parte interna dos habitats e estufas; restaurante privado', 'PÚRPURA');
-
 /* HABITAT */
 
 insert HABITAT(ID,fosso,tipo_solo,arvore_quant) values("WKUPCFJBXV", True, "neve", 1);
@@ -1133,117 +1052,56 @@ insert FORNECEDOR_EMAIL(CNPJ, email) values ("08917962000111", "ultrafarma.farma
 insert FORNECEDOR_EMAIL(CNPJ, email) values ("97429620000182", "haiz.frutas@gmail.com");
 insert FORNECEDOR_EMAIL(CNPJ, email) values ("96793493000133", "joaobosco@equipamento.vet.com");
 
-/* EXAME_ANIMAL */
+/* RECURSO_ARMAZENADO */
 
-insert EXAME_ANIMAL(data_exam, veterinario, animal) values("2010-07-12", "75256732345", "F8420I25K8");
-insert EXAME_ANIMAL(data_exam, veterinario, animal) values("2021-01-28", "69535214606", "68306448J5");
-insert EXAME_ANIMAL(data_exam, veterinario, animal) values("2022-07-02", "65129976022", "S8X5LA03CR");
-insert EXAME_ANIMAL(data_exam, veterinario, animal) values("2022-05-12", "58756599949", "3461J17382");
-insert EXAME_ANIMAL(data_exam, veterinario, animal) values("2004-12-24", "21424074564", "32QGTNHP80");
-insert EXAME_ANIMAL(data_exam, veterinario, animal) values("2020-11-05", "65068305179", "14W4G81L60");
-insert EXAME_ANIMAL(data_exam, veterinario, animal) values("2018-02-17", "60962609123", "3U8X2YL04O");
-insert EXAME_ANIMAL(data_exam, veterinario, animal) values("2018-02-17", "46894747871", "3I61750241");
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("ALINDLPP", "75108761000160", "carne", 200.70, "KG", "Alimento", "13-12-2022", "10-02-2023", 500.00, "AA001", 1, "AAA01"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("MANBUBUS", "11661872000117", "tinta", 50.00, "l", "Manutenção", "02-10-2022", "02-10-2037", 120.00, 'BB001', 1, 'AAA01'
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("LIMJINDJ", "08799660000113", "sabão", 100.00, "KG", "Limpeza", "15-12-2022", "15-12-2023", 200.00, "CC001", 1, "AAA01"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("JAUWUIWS", "07530555000194", "jaula", 13, "unid", "Jaula", "29-08-2022", "00-00-00", 20, "DD001", 1, "DDD01"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("FARIWWWX", "08917962000111", "analgésico", 12, "unid", "Fármaco", "10-12-2022", "10-12-2024", 20, "EE001", 1, "AAA01"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("FARDUWBQ", "08917962000111", "anti-inflamatório", 15, "unid", "Fármaco", "10-12-2022", "10-12-2023", 20, "EE001", 1, "AAA02"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("ALIWUHHO", "97429620000182", "penca de banana", 94, "unid", "Alimento", "20-12-2022", "27-12-2022", 150, "AA001", 1, "AAA02"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("VETQCMPI", "96793493000133", "vac antirábica", 7, "unid", "Veterinário", "15-12-2022", "22-12-2025", 15, "FF001", 1, "AAA01"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("VETDUIWW", "96793493000133", "anestésico", 16, "unid", "Veterinário", "12-11-2022", "22-12-2025", 20, "FF001", 1, "AAA01"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("PROWESDP", "37829203000132", "par de luvas", 34, "unid", "Mat. Profissa", "10-11-2022", "00-00-0000", 100, "GG001", 1, "AAA02"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("ALIWSPME", "75108761000160", "cacho de uvas", 82, "unid", "Alimento", "20-12-2022", "29-12-2022", "AA001", 1, "AAA03"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("MANXCMEA", "11661872000117", "ferramentas", 63, "unid", "Manutenção", "09-09-2021", "00-00-0000", "BB001", 1, "AAA02"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("LIMCNCWM", "08799660000113", "desinfetante", 14, "unid", "Limpeza", "10-12-2022", "10-12-2024", "CC001", 1, "AAA02"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("FAMCOWOW", "08917962000111", "antialérgico", 9, "unid", "Fármaco", "07-11-2022", "07-11-2024", 15, "EE001", 1, "AAA03"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("FAMNANAC", "08917962000111", "antibiótico", 11, "unid", "Fármaco", "08-10-2022", "08-10-2024", 25, "EE001", 1, "AAA04"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("ALISOWMD", "97429620000182", "manga", 20, "unid", "Alimento", "20-12-2022", "27-10-2022", 40, "AA001", 1, "AAA04"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("ALISOWMQ", "97429620000182", "maçã", 20, "unid", "Alimento", "20-12-2022", "27-10-2022", 40, "AA001", 1, "AAA05"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("FAREMOIC", "08917962000111", "cicatrizante", 28, "unid", "Fármaco", "19-12-2022", "19-12-2024", 45, "EE001", 1, "AAA05"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("FARWENIU", "08917962000111", "vermifungo", 30, "unid", "Fármaco", "19-12-2022", "19-12-2024", 45, "EE001", 1, "AAA06"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("LIMDOHDO", "08799660000113", "cloro", 13, "l", "Limpeza", "10-09-2022", "10-09-2024", 30, "CC001", 1, "AAA03"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("FARMPZEC", "08917962000111", "antitóxico", 20, "unid", "20-11-2022", "20-11-2024", 45, "EE001", 1, "AAA07"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("FARPNVWP", "08917962000111", "antitetânico", 26, "unid", "20-09-2022", "20-09-2024", 30, "EE001", 1, "AAA08"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("FAREWPWN", "08917962000111", "dexametasona", 28, "unid", "17-10-2022", "17-10-2024", 30, "EE001", 1, "AAA09"
+);
+insert RECURSO_ARMAZENADO(id,Forn_CNPJ,nome,quant_estoq,unidade, tipo, data_compra, data_vali,quant_forn,setor,nume_galpao,codi_prat) values("FARHQWQW", "08917962000111", "sulfamexazol", 29, "unid", "13-08-2022", "13-08-2024", 30, "EE001", 1, "AAA10");
 
-/* ANIMAL_INTERNADO */
-
-insert(setor,animal,data_entr,data_saida)
-values("1201", "F8420I25K8", "2021-28-01", NULL
-)
-insert(setor,animal,data_entr,data_saida)
-values("1301", "68306448J5", "2010-12-07", NULL
-)
-insert(setor,animal,data_entr,data_saida)
-values("1303", "S8X5LA03CR", "2022-02-07", NULL
-)
-insert(setor,animal,data_entr,data_saida)
-values("1105", "3461J17382", "2022-12-05", NULL
-)
-insert(setor,animal,data_entr,data_saida)
-values("1301", "32QGTNHP80", "2004-24-12", NULL
-)
-insert(setor,animal,data_entr,data_saida)
-values("1305", "14W4G81L60", "2020-05-11", NULL
-)
-insert(setor,animal,data_entr,data_saida)
-values("1305", "3U8X2YL04O", "2018-17-02", NULL
-)
-insert(setor,animal,data_entr,data_saida)
-values("1301", "3I61750241", "2008-18-04", NULL
-)
-insert(setor,animal,data_entr,data_saida)
-values("1301", "6S32130145", "2020-30-01", NULL
-)
-insert(setor,animal,data_entr,data_saida)
-values("1303", "2E5Y77S550", "2022-24-05", NULL
-)
-insert(setor,animal,data_entr,data_saida)
-values("1603", "A5V5IVG0E0", "2011-06-04", NULL
-)
-insert(setor,animal,data_entr,data_saida)
-values("1604", "74CH07608D", "2022-12-04", NULL
-)
-insert(setor,animal,data_entr,data_saida)
-values("1604", "M261603122", "2011-15-03", NULL
-)
-insert(setor,animal,data_entr,data_saida)
-values("1102", "05W0NOY832", "2020-05-01", NULL
-)
-insert(setor,animal,data_entr,data_saida)
-values("1105", "UJ72152U1H", "2022-15-07", NULL
-)
-insert(setor,animal,data_entr,data_saida)
-values("1102", "08524L2187", "2012-17-05", NULL
-)
-insert(setor,animal,data_entr,data_saida)
-values("1201", "11J0X058LR", "2000-18-03", NULL
-)
-insert(setor,animal,data_entr,data_saida)
-values("1604", "S001410K26", "2022-15-08", NULL
-)
-insert(setor,animal,data_entr,data_saida)
-values("1604", "15FX04E60F", "2021-19-01", NULL
-)
-insert(setor,animal,data_entr,data_saida)
-values("1604", "N452322623", "2022-26-07", NULL
-)
-insert(setor,animal,data_entr,data_saida)
-values("1102", "P70554I0AM", "2021-01-03", "2021-02-02"
-)
-insert(setor,animal,data_entr,data_saida)
-values("1105", "M35027O253", "2010-28-08", "2010-12-10"
-)
-insert(setor,animal,data_entr,data_saida)
-values("1102", "I7L7837T5U", "2022-09-08", "2022-02-09"
-)
-insert(setor,animal,data_entr,data_saida)
-values("1105", "3461J17382", "2022-24-04", "2022-17-05"
-)
-insert(setor,animal,data_entr,data_saida)
-values("1204", "R14RQ8O886", "2005-7-12", "2005-5-12"
-)
-insert(setor,animal,data_entr,data_saida)
-values("1204", "I2256N2K52", "2022-10-11", "2022-16-11"
-)
-insert(setor,animal,data_entr,data_saida)
-values("1204", "M261603122", "2018-25-06", "2018-01-07"
-)
-insert(setor,animal,data_entr,data_saida)
-values("1102", "NTP764E45E", "2009-09-09", "2009-12-09"
-)
-insert(setor,animal,data_entr,data_saida)
-values("1102", "05W0NOY832", "2020-10-12", "2020-12-12"
-)
-insert(setor,animal,data_entr,data_saida)
-values("1304", "06LV43MR04", "2022-2-01", "2022-17-05"
-)
-insert(setor,animal,data_entr,data_saida)
-values("1304", "8267Y03574", "2012-10-02", "2012-16-02"
-)
-insert(setor,animal,data_entr,data_saida)
-values("1102", "45803578T7", "2011-2-08", "2011-2-08"
-)
-insert(setor,animal,data_entr,data_saida)
-values("1304", "05W0NOY832", "2022-2-01", "2022-15-02")
 
 /* ANIMAIS */
 
@@ -1500,396 +1358,499 @@ insert ALA_CLINICA(setor_nume,alas_livre) values(1105,20);
 
 /* FUNCIONÁRIO */
 
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("90807296975","13635678","Maria nascimento","Motorista", "2826,00", "69098273", "Travessa Cristal", "Novo Aleixo" "Manaus", "32019835473", "85268084806")
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("75256732345","18845678","Maria filha","Veterinário", "13750,00", "65045231", "Travessa da Companhia", "Anil", "Sao Luis", "32019835473", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("69535214606","19945678","Maria nascimento","Veterinário", "13750,00", "34580390", "Rua Rio Branco", "Sao Jose", "Sabaru",  "32019835473", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("65129976022","13345678","Maria nazare","Veterinário", "13750,00", "21832125", "Rua Sao Boroncio", "Senador Camara", "Rio de Janeiro",  "32019835473", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("83085118309","10045678","Maria yaeger","Veterinário", "13750,00", "44055010", "Rua Anajas", "Parque Ipa", "Feira de Santana", "32019835473", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("74439631056","11145675","Maria sousa","Veterinário", "13750,00", "96040140", "Rua Dirceu de avila Martins", "Fragata", "Pelotas",  "32019835473", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("58756599949","11434567","Maria rosario","Veterinário", "13750,00", "58056694", " Rua Gecy Mercus Rodrigues", "Mangabeira", "Joao Pessoa", "32019835473", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("31231056284","15994567","Maria constatino","Manutenção_Habitat", "11840,00"", "69915300", "Conjunto Universitario", "Distrito Industrial", "Rio Branco" , "32019835473", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("69251120876","15345678","Maria pereira","Veterinário", "13750,00", "83602566", "Rua Joao Tigrinho de Freitas", "Moradias Bom Jesus", "Campo Largo" , "32019835473", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("67171010227","14992578","Maria silveiro","Motorista", "2826,00", "69908300", "Rua Joao Onofre", "Bosque", "Rio Branco", "32019835473", "13524927570")
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("31952488027","14885978","Rosana walker","Manutenção_Habitat", "11840,00"", "69306400", "Rua Jaricuna", "Nossa Senhora Aparecida", "Boa Vista", "32019835473" , NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("32733226752","19114578","Rosana Jalim","Veterinário", "13750,00", "65068286", "Rua Sol Nascente", "Vila Alonso Costa" , "Sao Luas"  , "32019835473", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("21424074564","10445679","Rosana trajano","Veterinário", "13750,00", "69311064", "Rua X", "Cauama", "Boa Vista", "32019835473", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("72427309663","14045675","Rosana auricolia","Manutenção_Habitat", "11840,00"","78058422", "Rua Cinquenta e Cinco", "CPA III", "Cuiaba" , "32019835473", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("60962609123","14645672","Rosana azumabito","Veterinário", "13750,00", "11454450", "Rua Guaratinguete", "Vila aurea (Vicente de Carvalho)", "Guaruja", "32019835473", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("39933253849","14545671","Ednaldo pereira","Veterinário", "13750,00", "69055737", "Condominio Parque dos Rios IV", "Parque 10 de Novembro", "Manaus", "32019835473", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("85996361750","14345672","Antonia inicio","Motorista", "2826,00", "69022324", "Rua 32", "Taruma-Aau", "Manaus", "32019835473", "08513151531")
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("77871602871","14399672","Rosana mauer","Manutenção_Habitat", "11840,00"", "64065290", " Rua Cachoeirinha", "Pedra Mole", "Teresina", "Piaua", "32019835473", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("51210234964","13345671","Rosana rothschild","Veterinário", "13750,00", "69304455", "Rua do Canario", "Mecejana", "Boa Vista", "32019835473", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("20777706533","13345672","Rosana alves","Manutenção_Habitat", "11840,00"", "11840,00"", "39406122", "Rua Cinco", "Colorado", "Montes Claros", "32019835473", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("61221444108","13345673","Andre filho","Manutenção_Habitat", "11840,00"", "27280755", "Servidao Carangola", "Vila Brasilia", "Volta Redonda" , "32019835473", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("46894747871","13345674","Andre grifth","Veterinário", "13750,00", "74943380", "Rua Larga", "Jardim Buriti Sereno", "Aparecida de Goiania", "32019835473", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("65068305179","13345675","Andre lima","Veterinário", "13750,00", "69304467", "Rua Elias Pessoa", "Mecejana", "Boa Vista", "32019835473", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("44858232350","91545675","Matheus yakuza","Manutenção_Habitat", "11840,00"", "69312369", "Rua Sao Camilo", "Cinturao Verde" , "Boa Vista", "32019835473", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("48268852374","13345676","Manoel gomes","Veterinário", "13750,00", "57071208", "Rua Anadia", "Clima Bom", "Maceia", "67628669617", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("13522722755","13345677","Andre rockfeller","Manutenção_Habitat", "11840,00"", "63041-150", "Rua Engenheiro Carlos Alberto Bezerra", "Triangulo", "Juazeiro do Norte" , "67628669617", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("41410814732","43345678","Andre musk","Motorista", "2826,00", "69317338", "Rua Luiz Reis Cristo", "Equatorial", "Boa Vista", "99009951", "67628669617")
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("88484251424","11345679","Ellon musk","Veterinário", "13750,00", "59069700", "Rua Camargo", "Pitimbu", "Natal" , "67628669617", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("85846242728","41345648","Andre nascimento","Veterinário", "13750,00", "76912886", "Rua Santa Clara", "Jorge Teixeira", "Ji-Parana", "67628669617", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("82508474673","71345628","Bolsonaro messias","Veterinário", "13750,00", "77016352", "Quadra 603 Sul Alameda 10", "Plano Diretor Sul", "Palmas",  "67628669617", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("19313860678","81345638","Fernando suarez","Veterinário", "13750,00", "05869223", "Rua Dois", "Jardim Sania Inga" , "Sao Paulo" , "67628669617", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("22292435668","91345658","Daniel alves","Veterinário", "13750,00", "79839013", "Rua das Mangueiras", "Jardim Colibri", "Dourados", "67628669617", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("63969744381","13456978","Neymar junior","Motorista", "2826,00", "74461230", "Rua Maria Angalica Miguel", "Jardim Clarissa", "Goiania", "44674106", "67628669617")
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("24766270906","13456948","Fernando junior","Manutenção_Habitat", "11840,00"", "79106380", " Rua Gabriel Bertoni" , "Vila Popular", "Campo Grande", "67628669617", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("48988178049","19456938","Fernando silva","Veterinário", "13750,00", "88355065", "Rua SZ - 015", "Steffen", "Brusque", "67628669617", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("51803701120","10456948","Fernanda nascimento","Manutenção_Habitat", "11840,00"", "76813826", "Estrada dos Periquitos", "Ulysses Guimaraes", "Porto Velho" , "67628669617", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("73671696377","10362789","Fernando matheus","Veterinário", "13750,00", "88075315" , "Vila Joao Vaz Sobrinho", "Balneario", "Florianapolis", "67628669617", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("58872151658","19396378","Fernando cipriano","Veterinário", "13750,00", "31870700", "Rua Olavo Ferreira", "Ribeiro de Abreu", "Belo Horizonte", "67628669617", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("20389313192","19547478","Joana souza","Motorista", "2826,00", "69316550", "Rua Genasio Alcimiro Lopes", "Senador Halio Campos", "Boa Vista", "67628669617", "10089149813")
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("63718324745","10397578","Fernando matheus","Veterinário", "13750,00", "89287303", "Rua Rodolfo Stoerberl" , "Rio Negro", " Sao Bento do Sul", "67628669617", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("16707201349","10479698","Jose cerra","Veterinário", "13750,00", "82970300", "Rua Reverendo Mariano Rodrigues de Castro", "Cajuru", "Curitiba" , "67628669617", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("15377615636","18447738","Valquria lima","Veterinário", "13750,00", "78128588", "Rua Ezequiel Atanasio", "Santa Maria I", "Varzea Grande" , "67628669617", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("65406506173","18947838","Jose paulo","Veterinário", "13750,00", "59064340", "Rua Anabal Correia", "Candelaria", "Natal", "67628669617", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("40752683541","18547038","Jose inacio","Manutenção_Habitat", "11840,00"", "49042590", " Rua Francisco Rollemberg Ramos", " Sao Conrado", "Aracaju", "67628669617", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("46118439458","14047138","Jose pinto","Manutenção_Habitat", "11840,00"", "93544385", "Rua Joao Antanio Alves", "Canudos", " Novo Hamburgo", "67628669617", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("84657959574","15047338","Jose ksovs","Manutenção_Habitat", "11840,00"", "79085033", "Rua Leancio de Souza Britto", "Conjunto Aero Rancho", "Campo Grande", "67628669617", NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("66529304676","16047138","Jose Nascimento","Motorista", "2826,00", "21362150", " Rua Aparecida", "Madureira", "Rio de Janeiro", "41823009", "67628669617")
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("58091379185","17047238","Jose Pereira","Manutenção_Habitat", "11840,00"", "41260260", "Largo das Araras", "Canabrava", "Salvador", "67628669617", NULL )
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
 
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("32019835473","18047438","Jose Sousa","gerente", "11840,00"", "25680361", "Rua Presidente Kubitscheck", "Retiro", "Petrapolis", NULL , NULL )
-insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) values ("67628669617","19036138","Jose Silva","gerente", "11840,00", "56912330", "Rua Vania Maria F. Silva", "Varzea", "Serra Talhada", NULL , NULL)
+values ("90807296975","13635678","Maria nascimento","Motorista", "2826,00", "69098273", "Travessa Cristal", "Novo Aleixo" "Manaus", "32019835473", "85268084806");
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
 
-/* MANUTENÇÃO HABITAT */
+values ("75256732345","18845678","Maria filha","Veterinário", "13750,00", "65045231", "Travessa da Companhia", "Anil", "Sao Luis", "32019835473", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
 
-insert MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) values ("THDRHUABEV", "31231056284", "2022-05-20", NULL, "Reforma no habitat")
-insert MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) values ("OZNYQASVOP", "31952488027", "2020-06-25", "2020-06-27", "Inovação para melhoramente do bem-estar animal")
-insert MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) values ("WSSCNMTLHC", "24766270906", "2004-08-19", "2003-12-15", "Reforma no habitat")
-insert MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) values ("XIRUZGRBAI", "51803701120", "2009-03-30", "2008-04-05", "Reforma no habitat")
-insert MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) values ("TETZVZOOFR", "13522722755", "2021-07-26", "2021-07-26", "Inovação para melhoramente do bem-estar animal")
-insert MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) values ("KOCIISRBFF", "44858232350", "2014-07-27", "2014-07-27", "Manutenção emergencial")
-insert MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) values ("AWGKBAJRFQ", "72427309663", "2022-02-17", "2022-02-18", "Manutenção emergencial")
-insert MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) values ("EZUMVXICDS", "31952488027", "2021-07-15", "2021-07-24", "Inovação para melhoramente do bem-estar animal")
-insert MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) values ("TEJAGKPHLM", "77871602871", "2022-06-16", "2021-02-04", "Inovação para melhoramente do bem-estar animal")
-insert MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) values ("TEJAGKPHLM", "61221444108", "2022-07-06", NULL, "Manutenção emergencial")
-insert MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) values ("MJGPNUSNNH", "20777706533", "2022-09-24", NULL, "Manutenção emergencial")
-insert MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) values ("VAWGOAEZIH", "72427309663", "2022-03-31", NULL, "Manutenção emergencial")
+values ("69535214606","19945678","Maria nascimento","Veterinário", "13750,00", "34580390", "Rua Rio Branco", "Sao Jose", "Sabaru",  "32019835473", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
 
-/* PRESCRIÇÃO_EXAME */
+values ("65129976022","13345678","Maria nazare","Veterinário", "13750,00", "21832125", "Rua Sao Boroncio", "Senador Camara", "Rio de Janeiro",  "32019835473", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
 
-insert PRESCRICAO_EXAME(data_exam, veterinario, animal, remedio) values ("2010-07-12", "75256732345", "F8420I25K8", "FAMNANAC")
-insert PRESCRICAO_EXAME(data_exam, veterinario, animal, remedio) values ("2021-01-28", "69535214606", "68306448J5", "FAMCOWOW")
-insert PRESCRICAO_EXAME(data_exam, veterinario, animal, remedio) values ("2022-07-02", "65129976022", "S8X5LA03CR", "FARIWWWX")
-insert PRESCRICAO_EXAME(data_exam, veterinario, animal, remedio) values ("2018-02-17", "46894747871", "3I61750241", "FARIWWWX")
-insert PRESCRICAO_EXAME(data_exam, veterinario, animal, remedio) values ("2022-05-12", "58756599949", "3461J17382", "FAMNANAC")
-insert PRESCRICAO_EXAME(data_exam, veterinario, animal, remedio) values ("2004-12-24", "21424074564", "32QGTNHP80", "FAMNANAC")
-insert PRESCRICAO_EXAME(data_exam, veterinario, animal, remedio) values ("2020-11-05", "65068305179", "14W4G81L60", "FARWENIU")
-insert PRESCRICAO_EXAME(data_exam, veterinario, animal, remedio) values ("2018-02-17", "60962609123", "3U8X2YL04O", "FAMNANAC")
+values ("83085118309","10045678","Maria yaeger","Veterinário", "13750,00", "44055010", "Rua Anajas", "Parque Ipa", "Feira de Santana", "32019835473", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("74439631056","11145675","Maria sousa","Veterinário", "13750,00", "96040140", "Rua Dirceu de avila Martins", "Fragata", "Pelotas",  "32019835473", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("58756599949","11434567","Maria rosario","Veterinário", "13750,00", "58056694", " Rua Gecy Mercus Rodrigues", "Mangabeira", "Joao Pessoa", "32019835473", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+values ("31231056284","15994567","Maria constatino","Manutenção_Habitat", "11840,00", "69915300", "Conjunto Universitario", "Distrito Industrial", "Rio Branco" , "32019835473", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("69251120876","15345678","Maria pereira","Veterinário", "13750,00", "83602566", "Rua Joao Tigrinho de Freitas", "Moradias Bom Jesus", "Campo Largo" , "32019835473", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("67171010227","14992578","Maria silveiro","Motorista", "2826,00", "69908300", "Rua Joao Onofre", "Bosque", "Rio Branco", "32019835473", "13524927570");
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("31952488027","14885978","Rosana walker","Manutenção_Habitat", "11840,00", "69306400", "Rua Jaricuna", "Nossa Senhora Aparecida", "Boa Vista", "32019835473" , NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("32733226752","19114578","Rosana Jalim","Veterinário", "13750,00", "65068286", "Rua Sol Nascente", "Vila Alonso Costa" , "Sao Luas"  , "32019835473", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("21424074564","10445679","Rosana trajano","Veterinário", "13750,00", "69311064", "Rua X", "Cauama", "Boa Vista", "32019835473", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("72427309663","14045675","Rosana auricolia","Manutenção_Habitat", "11840,00","78058422", "Rua Cinquenta e Cinco", "CPA III", "Cuiaba" , "32019835473", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("60962609123","14645672","Rosana azumabito","Veterinário", "13750,00", "11454450", "Rua Guaratinguete", "Vila aurea (Vicente de Carvalho)", "Guaruja", "32019835473", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("39933253849","14545671","Ednaldo pereira","Veterinário", "13750,00", "69055737", "Condominio Parque dos Rios IV", "Parque 10 de Novembro", "Manaus", "32019835473", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("85996361750","14345672","Antonia inicio","Motorista", "2826,00", "69022324", "Rua 32", "Taruma-Aau", "Manaus", "32019835473", "08513151531");
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("77871602871","14399672","Rosana mauer","Manutenção_Habitat", "11840,00", "64065290", " Rua Cachoeirinha", "Pedra Mole", "Teresina", "Piaua", "32019835473", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("51210234964","13345671","Rosana rothschild","Veterinário", "13750,00", "69304455", "Rua do Canario", "Mecejana", "Boa Vista", "32019835473", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("20777706533","13345672","Rosana alves","Manutenção_Habitat", "11840,00", "11840,00", "39406122", "Rua Cinco", "Colorado", "Montes Claros", "32019835473", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("61221444108","13345673","Andre filho","Manutenção_Habitat", "11840,00", "27280755", "Servidao Carangola", "Vila Brasilia", "Volta Redonda" , "32019835473", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("46894747871","13345674","Andre grifth","Veterinário", "13750,00", "74943380", "Rua Larga", "Jardim Buriti Sereno", "Aparecida de Goiania", "32019835473", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("65068305179","13345675","Andre lima","Veterinário", "13750,00", "69304467", "Rua Elias Pessoa", "Mecejana", "Boa Vista", "32019835473", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("44858232350","91545675","Matheus yakuza","Manutenção_Habitat", "11840,00", "69312369", "Rua Sao Camilo", "Cinturao Verde" , "Boa Vista", "32019835473", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("48268852374","13345676","Manoel gomes","Veterinário", "13750,00", "57071208", "Rua Anadia", "Clima Bom", "Maceia", "67628669617", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("13522722755","13345677","Andre rockfeller","Manutenção_Habitat", "11840,00", "63041-150", "Rua Engenheiro Carlos Alberto Bezerra", "Triangulo", "Juazeiro do Norte" , "67628669617", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("41410814732","43345678","Andre musk","Motorista", "2826,00", "69317338", "Rua Luiz Reis Cristo", "Equatorial", "Boa Vista", "99009951", "67628669617");
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("88484251424","11345679","Ellon musk","Veterinário", "13750,00", "59069700", "Rua Camargo", "Pitimbu", "Natal" , "67628669617", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("85846242728","41345648","Andre nascimento","Veterinário", "13750,00", "76912886", "Rua Santa Clara", "Jorge Teixeira", "Ji-Parana", "67628669617", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("82508474673","71345628","Bolsonaro messias","Veterinário", "13750,00", "77016352", "Quadra 603 Sul Alameda 10", "Plano Diretor Sul", "Palmas",  "67628669617", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("19313860678","81345638","Fernando suarez","Veterinário", "13750,00", "05869223", "Rua Dois", "Jardim Sania Inga" , "Sao Paulo" , "67628669617", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("22292435668","91345658","Daniel alves","Veterinário", "13750,00", "79839013", "Rua das Mangueiras", "Jardim Colibri", "Dourados", "67628669617", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("63969744381","13456978","Neymar junior","Motorista", "2826,00", "74461230", "Rua Maria Angalica Miguel", "Jardim Clarissa", "Goiania", "44674106", "67628669617");
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("24766270906","13456948","Fernando junior","Manutenção_Habitat", "11840,00", "79106380", " Rua Gabriel Bertoni" , "Vila Popular", "Campo Grande", "67628669617", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("48988178049","19456938","Fernando silva","Veterinário", "13750,00", "88355065", "Rua SZ - 015", "Steffen", "Brusque", "67628669617", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("51803701120","10456948","Fernanda nascimento","Manutenção_Habitat", "11840,00", "76813826", "Estrada dos Periquitos", "Ulysses Guimaraes", "Porto Velho" , "67628669617", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("73671696377","10362789","Fernando matheus","Veterinário", "13750,00", "88075315" , "Vila Joao Vaz Sobrinho", "Balneario", "Florianapolis", "67628669617", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("58872151658","19396378","Fernando cipriano","Veterinário", "13750,00", "31870700", "Rua Olavo Ferreira", "Ribeiro de Abreu", "Belo Horizonte", "67628669617", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("20389313192","19547478","Joana souza","Motorista", "2826,00", "69316550", "Rua Genasio Alcimiro Lopes", "Senador Halio Campos", "Boa Vista", "67628669617", "10089149813");
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("63718324745","10397578","Fernando matheus","Veterinário", "13750,00", "89287303", "Rua Rodolfo Stoerberl" , "Rio Negro", " Sao Bento do Sul", "67628669617", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("16707201349","10479698","Jose cerra","Veterinário", "13750,00", "82970300", "Rua Reverendo Mariano Rodrigues de Castro", "Cajuru", "Curitiba" , "67628669617", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("15377615636","18447738","Valquria lima","Veterinário", "13750,00", "78128588", "Rua Ezequiel Atanasio", "Santa Maria I", "Varzea Grande" , "67628669617", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("65406506173","18947838","Jose paulo","Veterinário", "13750,00", "59064340", "Rua Anabal Correia", "Candelaria", "Natal", "67628669617", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("40752683541","18547038","Jose inacio","Manutenção_Habitat", "11840,00", "49042590", " Rua Francisco Rollemberg Ramos", " Sao Conrado", "Aracaju", "67628669617", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("46118439458","14047138","Jose pinto","Manutenção_Habitat", "11840,00", "93544385", "Rua Joao Antanio Alves", "Canudos", " Novo Hamburgo", "67628669617", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("84657959574","15047338","Jose ksovs","Manutenção_Habitat", "11840,00", "79085033", "Rua Leancio de Souza Britto", "Conjunto Aero Rancho", "Campo Grande", "67628669617", NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("66529304676","16047138","Jose Nascimento","Motorista", "2826,00", "21362150", " Rua Aparecida", "Madureira", "Rio de Janeiro", "41823009", "67628669617");
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("58091379185","17047238","Jose Pereira","Manutenção_Habitat", "11840,00", "41260260", "Largo das Araras", "Canabrava", "Salvador", "67628669617", NULL );
+
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("32019835473","18047438","Jose Sousa","gerente", "11840,00", "25680361", "Rua Presidente Kubitscheck", "Retiro", "Petrapolis", NULL , NULL );
+insert FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CHN) 
+
+values ("67628669617","19036138","Jose Silva","gerente", "11840,00", "56912330", "Rua Vania Maria F. Silva", "Varzea", "Serra Talhada", NULL , NULL;)
 
 /* VETERINÁRIOS */
 
-insert VETERINARIO(matricula, CRMV, setor_resp) values ("75256732345" ,"CRMV-CE n°4037", 1101)
-insert VETERINARIO(matricula, CRMV, setor_resp) values ("69535214606" ,"CRMV-AM n°2889", 1101)
-insert VETERINARIO(matricula, CRMV, setor_resp) values ("65129976022" ,"CRMV-MA n°1403", 1103)
-insert VETERINARIO(matricula, CRMV, setor_resp) values ("83085118309" ,"CRMV-RS n°3408", 1104)
-insert VETERINARIO(matricula, CRMV, setor_resp) values ("74439631056" ,"CRMV-RR n°1463", 1105)
-insert VETERINARIO(matricula, CRMV, setor_resp) values ("58756599949" ,"CRMV-PB n°5326", 1105)
-insert VETERINARIO(matricula, CRMV, setor_resp) values ("69251120876" ,"CRMV-RJ n°5522", 1104)
-insert VETERINARIO(matricula, CRMV, setor_resp) values ("32733226752" ,"CRMV-PE n°6520", 1104)
-insert VETERINARIO(matricula, CRMV, setor_resp) values ("51210234964" ,"CRMV-RS n°2530", 1105)
-insert VETERINARIO(matricula, CRMV, setor_resp) values ("21424074564" ,"CRMV-BA n°5520", 1105)
-insert VETERINARIO(matricula, CRMV, setor_resp) values ("60962609123" ,"CRMV-RJ n°3895", 1102)
-insert VETERINARIO(matricula, CRMV, setor_resp) values ("39933253849" ,"CRMV-MS n°2214", 1104)
-insert VETERINARIO(matricula, CRMV, setor_resp) values ("46894747871" ,"CRMV-SE n°1893", 1104)
-insert VETERINARIO(matricula, CRMV, setor_resp) values ("65068305179" ,"CRMV-RN n°7777", 1103)
-insert VETERINARIO(matricula, CRMV, setor_resp) values ("48268852374" ,"CRMV-PR n°8015", 1102)
-insert VETERINARIO(matricula, CRMV, setor_resp) values ("88484251424" ,"CRMV-SC n°9593", 1104)
-insert VETERINARIO(matricula, CRMV, setor_resp) values ("85846242728" ,"CRMV-RR n°8325", 1105)
-insert VETERINARIO(matricula, CRMV, setor_resp) values ("82508474673" ,"CRMV-MG n°9033", 1101)
-insert VETERINARIO(matricula, CRMV, setor_resp) values ("19313860678" ,"CRMV-SC n°8520", 1104)
-insert VETERINARIO(matricula, CRMV, setor_resp) values ("22292435668" ,"CRMV-RO n°6752", 1101)
-insert VETERINARIO(matricula, CRMV, setor_resp) values ("48988178049" ,"CRMV-SC n°6386", 1104)
-insert VETERINARIO(matricula, CRMV, setor_resp) values ("73671696377" ,"CRMV-GO n°9285", 1104)
-insert VETERINARIO(matricula, CRMV, setor_resp) values ("58872151658" ,"CRMV-MS n°9847", 1105)
-insert VETERINARIO(matricula, CRMV, setor_resp) values ("63718324745" ,"CRMV-MS n°3015", 1102)
-insert VETERINARIO(matricula, CRMV, setor_resp) values ("16707201349" ,"CRMV-SP n°1597", 1101)
-insert VETERINARIO(matricula, CRMV, setor_resp) values ("15377615636" ,"CRMV-RO n°1013", 1101)
-insert VETERINARIO(matricula, CRMV, setor_resp) values ("65406506173" ,"CRMV-RN n°7081", 1105)
+insert VETERINARIO(matricula, CRMV, setor_resp) 
 
-/* TELEFONE_VISITANTE */
+values ("75256732345" ,"CRMV-CE n°4037", 1101);
+insert VETERINARIO(matricula, CRMV, setor_resp) 
 
-INSERT TELEFONE_VISITANTE (cpf, numero) 
-VALUES ('39737807076','11914755308'
-);
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('45669669586','64482378798'
-);
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('71743496272','23156909432'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('42905148515','24344841158'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('38403993117','76426078735'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('33826241425','97723581319'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('94851704221','52107813647'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('29063368856','67781375505'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('26230819756','23940071501'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('80454664397','63612908405'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('52608859657','54052700597'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('23996634923','71106412443'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('60712352481','11581721927'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('44393347452','41497522498'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('16418833793','44028157706'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('92655303890','55537846543'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('32219335561','83668066850'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('48417459271','99288674101'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('91588916538','98503973901'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('23483887807','64603661010'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('20046379603','67926064726'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('84157170344','95385258415'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('80729473866','48949340860' 
-);
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('83136895134','96837117408'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('93470417043','49879959485'
-);
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('45585070329','93417036542'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('79197803346','34228058507'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('26271122581','47994960006'
-);
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('70003113894','29934345781'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('54832333163','38661444829'
-);
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES '52371195130','58623066251' 
-);
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('80419552695','60590923145' 
-);
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('87527669698','51218481706'
-);
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('92472121664','71945058609'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('61648753715','50914287630' 
-);
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('14720724945','72313085708' 
-);
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('51631651412','37353265523' 
-);
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('79332903674','57095314802' 
-);
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('48846341462','31295917025'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('36024292035','13725158282'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('90108633536','87940104047'
-);
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('40640614155','67584336841'
-);
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('93187239657','43335280032'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('22971969090','96981046407'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('40967010019','90320237729'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('69665851162','94684010228'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('66767180099','35860652569'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('15638664795','53852974534'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('71044369787','83943706168'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('48649743845','14375303549'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('55711253527','86063755861' 
-);
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('27936501080','63782435818'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('82267577075','60159197287' 
-);
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('51007837430','79889368919'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('59673380819','73648130048'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('20340499554','51833500350'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('19765484135','53220781187'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('62134500556','33530650757'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('31201514573','84251814100'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('86021811123','47867205268'
-);
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('44089314104','93298973122'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('31289653676','80247071102'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('95822094190','26618488354'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('27234186452','40113187106'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('13272774061','16950339496' 
-);
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('77196909606','12683202261' 
-);
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('74782908084','10181769930'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('54512151036','94567438450'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('95092417520','97084191097'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('65530981465','63979484807' 
-);
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('67181603819','13921434386'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('36867546940','68285106403' 
-);
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('83847547009','40351060979'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('38338158046','39496798551'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('33867185448','57423634948'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('69248334386','10670004294'
-); 
-INSERT TELEFONE_VISITANTE (cpf, numero)
-VALUES ('63455403036','76596456412')
+values ("69535214606" ,"CRMV-AM n°2889", 1101);
+insert VETERINARIO(matricula, CRMV, setor_resp) 
 
-/* TELEFONE_FUNC */
+values ("65129976022" ,"CRMV-MA n°1403", 1103);
+insert VETERINARIO(matricula, CRMV, setor_resp) 
 
-insert TELEFONE_FUNC(numero, funcionario) values("9500009560", "75256732345")
-insert TELEFONE_FUNC(numero, funcionario) values("7813811874", "69535214606")
-insert TELEFONE_FUNC(numero, funcionario) values("7907128425", "65129976022")
-insert TELEFONE_FUNC(numero, funcionario) values("6447429408", "83085118309")
-insert TELEFONE_FUNC(numero, funcionario) values("6917702932", "74439631056")
-insert TELEFONE_FUNC(numero, funcionario) values("6176890336", "58756599949")
-insert TELEFONE_FUNC(numero, funcionario) values("7979775079", "31231056284")
-insert TELEFONE_FUNC(numero, funcionario) values("9620780124", "69251120876")
-insert TELEFONE_FUNC(numero, funcionario) values("6555009804", "67171010227")
-insert TELEFONE_FUNC(numero, funcionario) values("6136410653", "31952488027")
-insert TELEFONE_FUNC(numero, funcionario) values("8228784837", "32733226752")
-insert TELEFONE_FUNC(numero, funcionario) values("8817762465", "21424074564")
-insert TELEFONE_FUNC(numero, funcionario) values("7299103975", "72427309663")
-insert TELEFONE_FUNC(numero, funcionario) values("7825605537", "60962609123")
-insert TELEFONE_FUNC(numero, funcionario) values("7640333869", "39933253849")
-insert TELEFONE_FUNC(numero, funcionario) values("7693532797", "85996361750")
-insert TELEFONE_FUNC(numero, funcionario) values("8264577288", "77871602871")
-insert TELEFONE_FUNC(numero, funcionario) values("6786787102", "51210234964")
-insert TELEFONE_FUNC(numero, funcionario) values("9079818317", "20777706533")
-insert TELEFONE_FUNC(numero, funcionario) values("9560467161", "61221444108")
-insert TELEFONE_FUNC(numero, funcionario) values("9878828546", "46894747871")
-insert TELEFONE_FUNC(numero, funcionario) values("7078176026", "65068305179")
-insert TELEFONE_FUNC(numero, funcionario) values("8173492853", "44858232350")
-insert TELEFONE_FUNC(numero, funcionario) values("8029741059", "48268852374")
-insert TELEFONE_FUNC(numero, funcionario) values("6355862512", "13522722755")
-insert TELEFONE_FUNC(numero, funcionario) values("7262143970", "41410814732")
-insert TELEFONE_FUNC(numero, funcionario) values("6183984183", "88484251424")
-insert TELEFONE_FUNC(numero, funcionario) values("7163996076", "85846242728")
-insert TELEFONE_FUNC(numero, funcionario) values("9776148210", "82508474673")
-insert TELEFONE_FUNC(numero, funcionario) values("7088559336", "19313860678")
-insert TELEFONE_FUNC(numero, funcionario) values("7823738026", "22292435668")
-insert TELEFONE_FUNC(numero, funcionario) values("9646995584", "63969744381")
-insert TELEFONE_FUNC(numero, funcionario) values("6868914516", "24766270906")
-insert TELEFONE_FUNC(numero, funcionario) values("7149603068", "48988178049")
-insert TELEFONE_FUNC(numero, funcionario) values("9090044273", "51803701120")
-insert TELEFONE_FUNC(numero, funcionario) values("6326589169", "73671696377")
-insert TELEFONE_FUNC(numero, funcionario) values("8845025017", "58872151658")
-insert TELEFONE_FUNC(numero, funcionario) values("7330711736", "20389313192")
-insert TELEFONE_FUNC(numero, funcionario) values("9682240348", "63718324745")
-insert TELEFONE_FUNC(numero, funcionario) values("7526928560", "16707201349")
-insert TELEFONE_FUNC(numero, funcionario) values("9098665283", "15377615636")
-insert TELEFONE_FUNC(numero, funcionario) values("6477117142", "65406506173")
-insert TELEFONE_FUNC(numero, funcionario) values("8643899493", "40752683541")
-insert TELEFONE_FUNC(numero, funcionario) values("9010765631", "46118439458")
-insert TELEFONE_FUNC(numero, funcionario) values("6954497893", "84657959574")
-insert TELEFONE_FUNC(numero, funcionario) values("6538994161", "66529304676")
-insert TELEFONE_FUNC(numero, funcionario) values("6067853727", "58091379185")
-insert TELEFONE_FUNC(numero, funcionario) values("9099733237", "32019835473")
-insert TELEFONE_FUNC(numero, funcionario) values("9699191716", "67628669617")
-insert TELEFONE_FUNC(numero, funcionario) values("6111153062", "90807296975")
+values ("83085118309" ,"CRMV-RS n°3408", 1104);
+insert VETERINARIO(matricula, CRMV, setor_resp) 
+
+values ("74439631056" ,"CRMV-RR n°1463", 1105);
+insert VETERINARIO(matricula, CRMV, setor_resp) 
+
+values ("58756599949" ,"CRMV-PB n°5326", 1105);
+insert VETERINARIO(matricula, CRMV, setor_resp) 
+
+values ("69251120876" ,"CRMV-RJ n°5522", 1104);
+insert VETERINARIO(matricula, CRMV, setor_resp) 
+
+values ("32733226752" ,"CRMV-PE n°6520", 1104);
+insert VETERINARIO(matricula, CRMV, setor_resp) 
+
+values ("51210234964" ,"CRMV-RS n°2530", 1105);
+insert VETERINARIO(matricula, CRMV, setor_resp) 
+
+values ("21424074564" ,"CRMV-BA n°5520", 1105);
+insert VETERINARIO(matricula, CRMV, setor_resp) 
+
+values ("60962609123" ,"CRMV-RJ n°3895", 1102);
+insert VETERINARIO(matricula, CRMV, setor_resp) 
+
+values ("39933253849" ,"CRMV-MS n°2214", 1104);
+insert VETERINARIO(matricula, CRMV, setor_resp) 
+
+values ("46894747871" ,"CRMV-SE n°1893", 1104);
+insert VETERINARIO(matricula, CRMV, setor_resp) 
+
+values ("65068305179" ,"CRMV-RN n°7777", 1103);
+insert VETERINARIO(matricula, CRMV, setor_resp) 
+
+values ("48268852374" ,"CRMV-PR n°8015", 1102);
+insert VETERINARIO(matricula, CRMV, setor_resp) 
+
+values ("88484251424" ,"CRMV-SC n°9593", 1104);
+insert VETERINARIO(matricula, CRMV, setor_resp) 
+
+values ("85846242728" ,"CRMV-RR n°8325", 1105);
+insert VETERINARIO(matricula, CRMV, setor_resp) 
+
+values ("82508474673" ,"CRMV-MG n°9033", 1101);
+insert VETERINARIO(matricula, CRMV, setor_resp) 
+
+values ("19313860678" ,"CRMV-SC n°8520", 1104);
+insert VETERINARIO(matricula, CRMV, setor_resp) 
+
+values ("22292435668" ,"CRMV-RO n°6752", 1101);
+insert VETERINARIO(matricula, CRMV, setor_resp) 
+
+values ("48988178049" ,"CRMV-SC n°6386", 1104);
+insert VETERINARIO(matricula, CRMV, setor_resp) 
+
+values ("73671696377" ,"CRMV-GO n°9285", 1104);
+insert VETERINARIO(matricula, CRMV, setor_resp) 
+
+values ("58872151658" ,"CRMV-MS n°9847", 1105);
+insert VETERINARIO(matricula, CRMV, setor_resp) 
+
+values ("63718324745" ,"CRMV-MS n°3015", 1102);
+insert VETERINARIO(matricula, CRMV, setor_resp) 
+
+values ("16707201349" ,"CRMV-SP n°1597", 1101);
+insert VETERINARIO(matricula, CRMV, setor_resp) 
+
+values ("15377615636" ,"CRMV-RO n°1013", 1101);
+insert VETERINARIO(matricula, CRMV, setor_resp) 
+
+values ("65406506173" ,"CRMV-RN n°7081", 1105);
+
+insert TELEFONE_FUNC(numero, funcionario) values("9500009560", "75256732345");
+insert TELEFONE_FUNC(numero, funcionario) values("7813811874", "69535214606");
+insert TELEFONE_FUNC(numero, funcionario) values("7907128425", "65129976022");
+insert TELEFONE_FUNC(numero, funcionario) values("6447429408", "83085118309");
+insert TELEFONE_FUNC(numero, funcionario) values("6917702932", "74439631056");
+insert TELEFONE_FUNC(numero, funcionario) values("6176890336", "58756599949");
+insert TELEFONE_FUNC(numero, funcionario) values("7979775079", "31231056284");
+insert TELEFONE_FUNC(numero, funcionario) values("9620780124", "69251120876");
+insert TELEFONE_FUNC(numero, funcionario) values("6555009804", "67171010227");
+insert TELEFONE_FUNC(numero, funcionario) values("6136410653", "31952488027");
+insert TELEFONE_FUNC(numero, funcionario) values("8228784837", "32733226752");
+insert TELEFONE_FUNC(numero, funcionario) values("8817762465", "21424074564");
+insert TELEFONE_FUNC(numero, funcionario) values("7299103975", "72427309663");
+insert TELEFONE_FUNC(numero, funcionario) values("7825605537", "60962609123");
+insert TELEFONE_FUNC(numero, funcionario) values("7640333869", "39933253849");
+insert TELEFONE_FUNC(numero, funcionario) values("7693532797", "85996361750");
+insert TELEFONE_FUNC(numero, funcionario) values("8264577288", "77871602871");
+insert TELEFONE_FUNC(numero, funcionario) values("6786787102", "51210234964");
+insert TELEFONE_FUNC(numero, funcionario) values("9079818317", "20777706533");
+insert TELEFONE_FUNC(numero, funcionario) values("9560467161", "61221444108");
+insert TELEFONE_FUNC(numero, funcionario) values("9878828546", "46894747871");
+insert TELEFONE_FUNC(numero, funcionario) values("7078176026", "65068305179");
+insert TELEFONE_FUNC(numero, funcionario) values("8173492853", "44858232350");
+insert TELEFONE_FUNC(numero, funcionario) values("8029741059", "48268852374");
+insert TELEFONE_FUNC(numero, funcionario) values("6355862512", "13522722755");
+insert TELEFONE_FUNC(numero, funcionario) values("7262143970", "41410814732");
+insert TELEFONE_FUNC(numero, funcionario) values("6183984183", "88484251424");
+insert TELEFONE_FUNC(numero, funcionario) values("7163996076", "85846242728");
+insert TELEFONE_FUNC(numero, funcionario) values("9776148210", "82508474673");
+insert TELEFONE_FUNC(numero, funcionario) values("7088559336", "19313860678");
+insert TELEFONE_FUNC(numero, funcionario) values("7823738026", "22292435668");
+insert TELEFONE_FUNC(numero, funcionario) values("9646995584", "63969744381");
+insert TELEFONE_FUNC(numero, funcionario) values("6868914516", "24766270906");
+insert TELEFONE_FUNC(numero, funcionario) values("7149603068", "48988178049");
+insert TELEFONE_FUNC(numero, funcionario) values("9090044273", "51803701120");
+insert TELEFONE_FUNC(numero, funcionario) values("6326589169", "73671696377");
+insert TELEFONE_FUNC(numero, funcionario) values("8845025017", "58872151658");
+insert TELEFONE_FUNC(numero, funcionario) values("7330711736", "20389313192");
+insert TELEFONE_FUNC(numero, funcionario) values("9682240348", "63718324745");
+insert TELEFONE_FUNC(numero, funcionario) values("7526928560", "16707201349");
+insert TELEFONE_FUNC(numero, funcionario) values("9098665283", "15377615636");
+insert TELEFONE_FUNC(numero, funcionario) values("6477117142", "65406506173");
+insert TELEFONE_FUNC(numero, funcionario) values("8643899493", "40752683541");
+insert TELEFONE_FUNC(numero, funcionario) values("9010765631", "46118439458");
+insert TELEFONE_FUNC(numero, funcionario) values("6954497893", "84657959574");
+insert TELEFONE_FUNC(numero, funcionario) values("6538994161", "66529304676");
+insert TELEFONE_FUNC(numero, funcionario) values("6067853727", "58091379185");
+insert TELEFONE_FUNC(numero, funcionario) values("9099733237", "32019835473");
+insert TELEFONE_FUNC(numero, funcionario) values("9699191716", "67628669617");
+insert TELEFONE_FUNC(numero, funcionario) values("6111153062", "90807296975");
+
+/* MANUTENÇÃO HABITAT */
+
+insert MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) 
+
+values ("THDRHUABEV", "31231056284", "2022-05-20", NULL, "Reforma no habitat");
+insert MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) 
+
+values ("OZNYQASVOP", "31952488027", "2020-06-25", "2020-06-27", "Inovação para melhoramente do bem-estar animal");
+insert MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) 
+
+values ("WSSCNMTLHC", "24766270906", "2004-08-19", "2003-12-15", "Reforma no habitat");
+insert MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) 
+
+values ("XIRUZGRBAI", "51803701120", "2009-03-30", "2008-04-05", "Reforma no habitat");
+insert MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) 
+
+values ("TETZVZOOFR", "13522722755", "2021-07-26", "2021-07-26", "Inovação para melhoramente do bem-estar animal");
+insert MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) 
+
+values ("KOCIISRBFF", "44858232350", "2014-07-27", "2014-07-27", "Manutenção emergencial");
+insert MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) 
+
+values ("AWGKBAJRFQ", "72427309663", "2022-02-17", "2022-02-18", "Manutenção emergencial");
+insert MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) 
+
+values ("EZUMVXICDS", "31952488027", "2021-07-15", "2021-07-24", "Inovação para melhoramente do bem-estar animal");
+insert MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) 
+
+values ("TEJAGKPHLM", "77871602871", "2022-06-16", "2021-02-04", "Inovação para melhoramente do bem-estar animal");
+insert MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) 
+
+values ("TEJAGKPHLM", "61221444108", "2022-07-06", NULL, "Manutenção emergencial");
+insert MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) 
+
+values ("MJGPNUSNNH", "20777706533", "2022-09-24", NULL, "Manutenção emergencial");
+insert MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) 
+
+values ("VAWGOAEZIH", "72427309663", "2022-03-31", NULL, "Manutenção emergencial");
+
+/* EXAME_ANIMAL */
+
+insert EXAME_ANIMAL(data_exam, veterinario, animal) values("2010-07-12", "75256732345", "F8420I25K8");
+insert EXAME_ANIMAL(data_exam, veterinario, animal) values("2021-01-28", "69535214606", "68306448J5");
+insert EXAME_ANIMAL(data_exam, veterinario, animal) values("2022-07-02", "65129976022", "S8X5LA03CR");
+insert EXAME_ANIMAL(data_exam, veterinario, animal) values("2022-05-12", "58756599949", "3461J17382");
+insert EXAME_ANIMAL(data_exam, veterinario, animal) values("2004-12-24", "21424074564", "32QGTNHP80");
+insert EXAME_ANIMAL(data_exam, veterinario, animal) values("2020-11-05", "65068305179", "14W4G81L60");
+insert EXAME_ANIMAL(data_exam, veterinario, animal) values("2018-02-17", "60962609123", "3U8X2YL04O");
+insert EXAME_ANIMAL(data_exam, veterinario, animal) values("2018-02-17", "46894747871", "3I61750241");
+
+/* ANIMAL_INTERNADO */
+
+insert(setor,animal,data_entr,data_saida)
+values("1201", "F8420I25K8", "2021-28-01", NULL
+);
+
+insert(setor,animal,data_entr,data_saida)
+values("1301", "68306448J5", "2010-12-07", NULL
+);
+
+insert(setor,animal,data_entr,data_saida)
+values("1303", "S8X5LA03CR", "2022-02-07", NULL
+);
+
+insert(setor,animal,data_entr,data_saida)
+values("1105", "3461J17382", "2022-12-05", NULL
+);
+
+insert(setor,animal,data_entr,data_saida)
+values("1301", "32QGTNHP80", "2004-24-12", NULL
+);
+
+insert(setor,animal,data_entr,data_saida)
+values("1305", "14W4G81L60", "2020-05-11", NULL
+);
+
+insert(setor,animal,data_entr,data_saida)
+values("1305", "3U8X2YL04O", "2018-17-02", NULL
+);
+
+insert(setor,animal,data_entr,data_saida)
+values("1301", "3I61750241", "2008-18-04", NULL
+);
+
+insert(setor,animal,data_entr,data_saida)
+values("1301", "6S32130145", "2020-30-01", NULL
+);
+
+insert(setor,animal,data_entr,data_saida)
+values("1303", "2E5Y77S550", "2022-24-05", NULL
+);
+
+insert(setor,animal,data_entr,data_saida)
+values("1603", "A5V5IVG0E0", "2011-06-04", NULL
+);
+
+insert(setor,animal,data_entr,data_saida)
+values("1604", "74CH07608D", "2022-12-04", NULL
+);
+
+insert(setor,animal,data_entr,data_saida)
+values("1604", "M261603122", "2011-15-03", NULL
+);
+
+insert(setor,animal,data_entr,data_saida)
+values("1102", "05W0NOY832", "2020-05-01", NULL
+);
+
+insert(setor,animal,data_entr,data_saida)
+values("1105", "UJ72152U1H", "2022-15-07", NULL
+);
+
+insert(setor,animal,data_entr,data_saida)
+values("1102", "08524L2187", "2012-17-05", NULL
+);
+
+insert(setor,animal,data_entr,data_saida)
+values("1201", "11J0X058LR", "2000-18-03", NULL
+);
+
+insert(setor,animal,data_entr,data_saida)
+values("1604", "S001410K26", "2022-15-08", NULL
+);
+
+insert(setor,animal,data_entr,data_saida)
+values("1604", "15FX04E60F", "2021-19-01", NULL
+);
+
+insert(setor,animal,data_entr,data_saida)
+values("1604", "N452322623", "2022-26-07", NULL
+);
+
+insert(setor,animal,data_entr,data_saida)
+values("1102", "P70554I0AM", "2021-01-03", "2021-02-02"
+);
+
+insert(setor,animal,data_entr,data_saida)
+values("1105", "M35027O253", "2010-28-08", "2010-12-10"
+);
+
+insert(setor,animal,data_entr,data_saida)
+values("1102", "I7L7837T5U", "2022-09-08", "2022-02-09"
+);
+
+insert(setor,animal,data_entr,data_saida)
+values("1105", "3461J17382", "2022-24-04", "2022-17-05"
+);
+
+insert(setor,animal,data_entr,data_saida)
+values("1204", "R14RQ8O886", "2005-7-12", "2005-5-12"
+);
+
+insert(setor,animal,data_entr,data_saida)
+values("1204", "I2256N2K52", "2022-10-11", "2022-16-11"
+);
+
+insert(setor,animal,data_entr,data_saida)
+values("1204", "M261603122", "2018-25-06", "2018-01-07"
+);
+
+insert(setor,animal,data_entr,data_saida)
+values("1102", "NTP764E45E", "2009-09-09", "2009-12-09"
+);
+
+insert(setor,animal,data_entr,data_saida)
+values("1102", "05W0NOY832", "2020-10-12", "2020-12-12"
+);
+
+insert(setor,animal,data_entr,data_saida)
+values("1304", "06LV43MR04", "2022-2-01", "2022-17-05"
+);
+
+insert(setor,animal,data_entr,data_saida)
+values("1304", "8267Y03574", "2012-10-02", "2012-16-02"
+);
+
+insert(setor,animal,data_entr,data_saida)
+values("1102", "45803578T7", "2011-2-08", "2011-2-08"
+);
+
+insert(setor,animal,data_entr,data_saida)
+values("1304", "05W0NOY832", "2022-2-01", "2022-15-02"
+);
+
+/* PRESCRIÇÃO_EXAME */
+
+insert PRESCRICAO_EXAME(data_exam, veterinario, animal, remedio) 
+
+values ("2010-07-12", "75256732345", "F8420I25K8", "FAMNANAC");
+insert PRESCRICAO_EXAME(data_exam, veterinario, animal, remedio) 
+
+values ("2021-01-28", "69535214606", "68306448J5", "FAMCOWOW");
+insert PRESCRICAO_EXAME(data_exam, veterinario, animal, remedio) 
+
+values ("2022-07-02", "65129976022", "S8X5LA03CR", "FARIWWWX");
+insert PRESCRICAO_EXAME(data_exam, veterinario, animal, remedio) 
+
+values ("2018-02-17", "46894747871", "3I61750241", "FARIWWWX");
+insert PRESCRICAO_EXAME(data_exam, veterinario, animal, remedio) 
+
+values ("2022-05-12", "58756599949", "3461J17382", "FAMNANAC");
+insert PRESCRICAO_EXAME(data_exam, veterinario, animal, remedio) 
+
+values ("2004-12-24", "21424074564", "32QGTNHP80", "FAMNANAC");
+insert PRESCRICAO_EXAME(data_exam, veterinario, animal, remedio) 
+
+values ("2020-11-05", "65068305179", "14W4G81L60", "FARWENIU");
+insert PRESCRICAO_EXAME(data_exam, veterinario, animal, remedio) 
+
+values ("2018-02-17", "60962609123", "3U8X2YL04O", "FAMNANAC");
