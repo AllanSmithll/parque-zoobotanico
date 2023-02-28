@@ -3,7 +3,7 @@
 */
 
 SELECT min(idnasc), max(idnasc)
-FROM VISITANTE;]
+FROM VISITANTE;
 
 /*
 2. Selecione o nome de vistantes por ordem decresente 
@@ -68,20 +68,9 @@ WHERE pais_orig NOT LIKE 'a%';
 */
 SELECT AVG(tipo)
 FROM RECURSO_ARMAZENADO;
-
-
 /*
 7.Mostre onde a quantidade de fornecedores é menor que 10 
 */
 
 SELECT FROM RECURSO_ARMAZENADO
 HAVING COUNT(quant_forn) > 10;
-
-
-/*
-8. consulta os visitantes que também são pesquisadores
-*/
-
-SELECT P.cpf, V.cpf 
-FROM VISITANTES V INNER JOIN PESQUISADORES S
-ON P.cpf  = V.cpf;
