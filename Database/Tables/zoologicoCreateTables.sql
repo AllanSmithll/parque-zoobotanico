@@ -1,3 +1,5 @@
+Use ZOOLOGICO;
+
 CREATE TABLE IF NOT EXISTS VISITANTE
 (
 CPF		char(11)		    NOT NULL,
@@ -5,7 +7,7 @@ RG		char(7)		        NOT NULL,
 nome		varchar(30)		NOT NULL,
 genero      char(1)	    	NULL        DEFAULT 'M',
 email		varchar(35)		NULL,
-data_nasc	date			NOT NULL,
+data_nasc	varchar(40)			NOT NULL,
 pais_orig	varchar(25)		NOT NULL    DEFAULT 'BRASIL',
 esta_prov	varchar(45)		NOT NULL    DEFAULT 'PARAÍBA',
 cidade	varchar(45)		NOT NULL        DEFAULT 'SÃO MIGUEL DO TAIPU',
@@ -59,7 +61,6 @@ CONSTRAINT 	UNIQUE (nume_id_cart),
 CONSTRAINT 	FOREIGN KEY (CPF) REFERENCES VISITANTE(CPF)
 );
 
-
 /* tabela PROJETO_PESQUISA independente*/ 
 
 CREATE TABLE IF NOT EXISTS PROJETO_PESQUISA
@@ -77,8 +78,8 @@ CREATE TABLE IF NOT EXISTS DESENVOLVIMENTO_PROJETO
 (
 cod_proj		char(8)		    NOT NULL,
 pesquisador		char(11)		NOT NULL,
-data_inicio		date			NOT NULL,	
-data_final		date			NULL,
+data_inicio		varchar(40)			NOT NULL,	
+data_final		varchar(40)			NULL,
 
 CONSTRAINT	PRIMARY KEY (cod_proj, pesquisador, data_inicio),
 CONSTRAINT	FOREIGN KEY (pesquisador) REFERENCES PESQUISADOR(CPF),
@@ -101,8 +102,8 @@ CONSTRAINT	PRIMARY KEY (ID)
 
 CREATE TABLE IF NOT EXISTS ANIMAL
 (
-ID		        char(10)		NOT NULL AUTO_INCREMENT,
-data_cheg		date			NOT NULL,
+ID		        char(10)		NOT NULL,
+data_cheg		varchar(40)			NOT NULL,
 saude			varchar(15)		NOT NULL DEFAULT 'SAUDÁVEL',
 nome_cien		varchar(35)		NOT NULL,	
 nome_popu		varchar(30)		NULL,
@@ -130,8 +131,8 @@ CREATE TABLE IF NOT EXISTS ANIMAL_INTERNACAO
 (
 setor_nume		int(4)		    NOT NULL AUTO_INCREMENT,
 animal		    char(10)		NOT NULL,
-data_entr		date			NOT NULL,
-data_saida		date			NULL,
+data_entr		varchar(40)			NOT NULL,
+data_saida		varchar(40)			NULL,
 
 CONSTRAINT	PRIMARY KEY(setor_nume, animal, data_entr),
 CONSTRAINT	FOREIGN KEY(setor_nume)	REFERENCES	ALA_CLINICA(setor_nume),
@@ -141,27 +142,27 @@ CONSTRAINT	FOREIGN KEY(animal)	REFERENCES ANIMAL(ID)
 /* tabela FUNCIONARIO independente */ 
 CREATE TABLE IF NOT EXISTS FUNCIONARIO
 (
-matricula	char(8)         NOT NULL,
+matricula	char(11)         NOT NULL,
 CPF		    char(11)		NOT NULL,	
 nome		varchar(30)		NOT NULL,
 funcao	    varchar(20)		NOT NULL,
 salario		decimal			NOT NULL,
 CNH		    char(10)		NULL,
-gerente	    char(8)		    NULL,
+gerente	    char(11)		    NULL,
 CEP		    char(8)		    NOT NULL,
 rua		    varchar(45)		NOT NULL,
 bairro	    varchar(45)		NOT NULL,
 cidade      varchar(45)     NOT NULL DEFAULT 'SÃO MIGUEL DO TAIPU',
 
 CONSTRAINT	PRIMARY KEY(matricula),
-CONSTRAINT	UNIQUE (CPF),
-CONSTRAINT	FOREIGN KEY(gerente)	REFERENCES FUNCIONARIO(matricula)
+CONSTRAINT	UNIQUE (CPF)
 );
+/*CONSTRAINT	FOREIGN KEY(gerente)	REFERENCES FUNCIONARIO(matricula)*/
 
 /* tabela TELEFONE_FUNC depende de FUNCIONARIO*/
 CREATE TABLE IF NOT EXISTS TELEFONE_FUNC
 (
-funcionario	char(8)		    NOT NULL,
+funcionario	char(11)		    NOT NULL,
 numero	    char(14)		NOT NULL,
 
 CONSTRAINT	PRIMARY KEY (funcionario, numero),
@@ -172,7 +173,7 @@ CONSTRAINT 	FOREIGN KEY (funcionario) REFERENCES FUNCIONARIO(matricula)
 
 CREATE TABLE IF NOT EXISTS VETERINARIO
 (
-matricula		char(8)		NOT NULL,
+matricula		char(11)		NOT NULL,
 CRMV			char(8)		NOT NULL,
 setor_resp		int(2)		NULL,	
 
@@ -188,7 +189,7 @@ id_compra		char(11)		NOT NULL,
 comprador		CHAR(11)		NOT NULL,
 ingresso		char(8)		    NOT NULL,
 auxiliador_func	char(8)		    NULL,
-data_compra		date			NOT NULL,
+data_compra		varchar(40)			NOT NULL,
 
 CONSTRAINT	PRIMARY KEY (id_compra),
 CONSTRAINT 	FOREIGN KEY (auxiliador_func)   REFERENCES FUNCIONARIO(matricula),
@@ -225,8 +226,8 @@ nome		varchar(30)		NOT NULL,
 quant_estoq decimal  		Not NULL DEFAULT 0,
 unidade	    varchar(5)  	NULL DEFAULT 'KG',
 tipo		varchar(25)		NOT NULL,
-data_compra	date			NOT NULL,
-data_vali	date			NOT NULL,
+data_compra	varchar(40)			NOT NULL,
+data_vali	varchar(40)			NOT NULL,
 quant_forn	decimal		    NOT NULL ,
 setor		char(5)		    NOT NULL,
 nume_galpao	int(4)		    NULL,
@@ -241,8 +242,8 @@ CREATE TABLE IF NOT EXISTS MANUNTECAO_HABITAT
 (
 habitat 	char(10)	NOT NULL,
 funcionario	char(8)	    NOT NULL,
-data_inicio	datetime	NOT NULL,
-data_final	datetime	NULL,	
+data_inicio	varchar(40)	NOT NULL,
+data_final	varchar(40)	NULL,	
 descricao	text	    NOT NULL,
 
 CONSTRAINT PRIMARY KEY (habitat , funcionario, data_inicio),
@@ -253,8 +254,8 @@ CONSTRAINT FOREIGN KEY (funcionario) REFERENCES FUNCIONARIO(matricula)
 /* tabela EXAME_ANIMAL*/
 CREATE TABLE IF NOT EXISTS EXAME_ANIMAL
 (
-data_exam	datetime	NOT NULL,
-veterinario	char(8)	    NOT NULL,
+data_exam	varchar(40)	NOT NULL,
+veterinario	char(11)	    NOT NULL,
 animal	    char(10)	NOT NULL,
 
 CONSTRAINT PRIMARY KEY (data_exam, veterinario, animal),
@@ -265,14 +266,14 @@ CONSTRAINT FOREIGN KEY (animal)      REFERENCES ANIMAL(ID)
 /* tabela PRESCRICAO_EXAME*/
 CREATE TABLE IF NOT EXISTS PRESCRICAO_EXAME
 (
-data_exam	datetime	NOT NULL,
-veterinario	char(8)	    NOT NULL,
+data_exam	varchar(40)	NOT NULL,
+veterinario	char(11)	    NOT NULL,
 animal	    char(10)	NOT NULL,
 remedio 	char(8)	    NOT NULL,
 
 CONSTRAINT PRIMARY KEY (data_exam, veterinario, animal, remedio),
 
-CONSTRAINT FOREIGN KEY (veterinario, animal, data_exam)    REFERENCES EXAME_ANIMAL(veterinario, animal, data_exam),
+CONSTRAINT FOREIGN KEY (data_exam, veterinario, animal )    REFERENCES EXAME_ANIMAL(data_exam, veterinario, animal),
 
 CONSTRAINT FOREIGN KEY (REMEDIO)        REFERENCES RECURSO_ARMAZENADO(id)
 );
