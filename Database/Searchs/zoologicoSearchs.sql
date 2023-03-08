@@ -1,3 +1,13 @@
+/*
+1. Informe a quantidade de ingressos vendidos e a quantidade arrecada para cada tipo de ingresso no catalogo.
+*/
+select CI.tipo_nome, count(*) as "Quantidade Ingressos Vendidos", SUM(CI.preco) as "Valores ARRECADADOS"
+from ingressos_comprados as BI
+inner join ingresso_catalago as CI
+inner join ingresso_disponivel as DI
+on BI.ingresso = DI.ID && DI.tipo = CI.tipo_id
+group by CI.tipo_nome;
+
 /* 
 1. Procure, na tabela visitante, quando nasceu os visitantes mais novo e o mais velho
 */

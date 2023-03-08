@@ -52,9 +52,9 @@ CREATE TABLE IF NOT EXISTS PESQUISADOR
 (
 CPF	            char(11)		NOT NULL,
 nume_id_cart	char(8)		    NOT NULL,	
-instituicao		VARCHAR(45)		NULL,
-grad_acad		varchar(30)		NULL,
-concl_supe  	YEAR    	    NULL,
+instituicao		VARCHAR(80)		NULL,
+grad_acad		varchar(40)		NULL,
+conclusao     	YEAR    	    NULL,
 
 CONSTRAINT	PRIMARY KEY (CPF),
 CONSTRAINT 	UNIQUE (nume_id_cart),
@@ -201,7 +201,7 @@ CONSTRAINT 	FOREIGN KEY (ingresso) 		    REFERENCES INGRESSO_DISPONIVEL(ID)
 CREATE TABLE IF NOT EXISTS FORNECEDOR
 (
 CNPJ		char(14)		NOT NULL,
-ENDERECO	VARchar(45)		NOT NULL,
+ENDERECO	text		NOT NULL,
 nome_fant	varchar(45)		NOT NULL,
 
 CONSTRAINT	PRIMARY KEY (CNPJ)
@@ -241,7 +241,7 @@ CONSTRAINT FOREIGN KEY (Forn_CNPJ) REFERENCES FORNECEDOR(CNPJ)
 CREATE TABLE IF NOT EXISTS MANUNTECAO_HABITAT
 (
 habitat 	char(10)	NOT NULL,
-funcionario	char(8)	    NOT NULL,
+funcionario	char(10)	    NOT NULL,
 data_inicio	varchar(40)	NOT NULL,
 data_final	varchar(40)	NULL,	
 descricao	text	    NOT NULL,
@@ -282,9 +282,9 @@ ALTER TABLE VISITANTE   ADD CONSTRAINT gen_check CHECK (genero='M' or genero='F'
 ALTER TABLE VISITANTE   ADD CONSTRAINT mail_VISITANTE_check CHECK (email like '%@%.%');
 
 ALTER TABLE INGRESSO_CATALAGO   ADD CONSTRAINT preco_check CHECK (preco >=0);
-ALTER TABLE INGRESSO_CATALAGO   ADD CONSTRAINT cor_check CHECK (cor in ('AZUL','VERDE',"AMARELO",'VERMELHO','PÚRPURA'));
+/*ALTER TABLE INGRESSO_CATALAGO   ADD CONSTRAINT cor_check CHECK (cor in ('AZUL','VERDE',"AMARELO",'VERMELHO','PÚRPURA'));
 
-ALTER TABLE PESQUISADOR   ADD CONSTRAINT graduacao_check CHECK (grad_acad in ('TECNOLÓGO','BACHARELADO','MESTRADO','DOUTORADO'));
+--ALTER TABLE PESQUISADOR   ADD CONSTRAINT graduacao_check CHECK (grad_acad in ('TECNOLÓGO','BACHARELADO','MESTRADO','DOUTORADO'));*/
 
 ALTER TABLE HABITAT   ADD CONSTRAINT arvores_check CHECK (arvore_quant >=0);
 
