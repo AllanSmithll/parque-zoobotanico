@@ -1,6 +1,38 @@
+/*Demonstrando todas as tabelas */
+select * from VISITANTE;
+select * from TELEFONE_VISITANTE;
+
+select * from PESQUISADOR;
+select * from PROJETO_PESQUISA;
+select * from DESENVOLVIMENTO_PROJETO;
+
+select * from INGRESSO_CATALAGO;
+select * from INGRESSO_DISPONIVEL;
+select * from INGRESSOS_COMPRADOS;
+
+select * from FUNCIONARIO;
+select * from TELEFONE_FUNC;
+select * from VETERINARIO;
+
+select * from HABITAT;
+select * from MANUNTECAO_HABITAT;
+
+select * from ANIMAL;
+select * from ANIMAL_INTERNACAO;
+
+select * from ALA_CLINICA;
+select * from PRESCRICAO_EXAME;
+select * from EXAME_ANIMAL;
+
+select * from RECURSO_ARMAZENADO;
+select * from FORNECEDOR;
+select * from FORNECEDOR_EMAIL;
+
+
 /*
 1. Informe a quantidade de ingressos vendidos e a quantidade arrecada para cada tipo de ingresso no catalogo.
 */
+
 select CI.tipo_nome, count(*) as "Quantidade Ingressos Vendidos", SUM(CI.preco) as "Valores ARRECADADOS"
 from ingressos_comprados as BI
 inner join ingresso_catalago as CI
@@ -9,78 +41,36 @@ on BI.ingresso = DI.ID && DI.tipo = CI.tipo_id
 group by CI.tipo_nome;
 
 /* 
-1. Procure, na tabela visitante, quando nasceu os visitantes mais novo e o mais velho
+2. Informe o CPF, nome, data de nascimento dos visitantes do gênero Feminimo da PARAÍBA em ordem decrescente pela data de nascimento
 */
 
-SELECT min(idnasc), max(idnasc)
-FROM VISITANTE;
+select CPF, Nome, data_nasc
+From VISITANTE
+where upper(esta_prov) in ('PARAÍBA') and upper(genero)='F'
+Order by data_Nasc desc ;
+
+/* 
+3. Informe o nome dos visitantes e os seus respectivos estados/provincia que não são da Paraíba e que compraram ingressos 
+*/
 
 /*
-2. Selecione o nome de vistantes por ordem decresente 
+4. Informe quais são os funcionários que possuem JOSÉ no nome e possuam salários acima de 10 mil reais.
 */
-
-SELECT FROM PROJETO_PESQUISA
-ORDER BY instituicao  DESC;
-/*
-3. selecione apenas visitantes de são paulo
-*/
-SELECT FROM VISITANTE
-WHERE esta_prov IN ('São Paulo');
 
 /*
-3. selecione apenas  visitantes  que não são da bahia
+5. Informe a quantidade de manutenções que foram realizadas por cada tipo de habitat 
 */
-
-SELECT FROM VISTITANE
-WHERE esta_prov NOT IN ('Bahia');
 
 /*
-4.Retorne os pesquisadores formados entre 1990 e 2000 
+6. Informe o nome, CRMV, Salario e o setor no qual o Veterinário é responsável.
 */
-SELECT FROM PESQUISADOR 
-WHERE concl_supe BETWEEN 1990 AND 2000;
-/*
-4. Retorna os funcionarios cujo salario não está entre 1500 à 2000
-*/
-SELECT FROM FUNCIONARIO
-WHERE salario NOT BETWEEN 1500 AND 2000;
+
 
 /*
-5. Mostre projetos de pesquisa onde não existe subtitulo
+7.Informe a media da quantidade de recursos amazenados para cada tipo.
 */
 
-SELECT FROM PROJETO_PESQUISA
-WHERE subtitulo IS NULL;
 
 /*
-5. Mostre apenas projetos com datas
+8. Informe todas as informações dos animais que ainda estão internados. 
 */
-
-SELECT FROM DESENVOLVIMENTO_PROJETO
-WHERE data_final IS NOT NULL;
-
-/*
-6. Mostre apenas os animais inciados com a letra "a"
-*/
-
-SELECT FROM ANIMAL
-WHERE nome_popu LIKE 'a%';
-
-/*
-6. Mostre apenas os vistantes de paises que nao começam com a letra "a"
-*/
-
-SELECT FROM VISITANTE
-WHERE pais_orig NOT LIKE 'a%';
-
-/*
-7.Seleciona a media de quais os tipos de recursos amazenados
-*/
-SELECT AVG(tipo)
-FROM RECURSO_ARMAZENADO;
-/*
-7.Mostre onde a quantidade de fornecedores é menor que 10 
-*/
-
-SELECT FROM RECURSO_ARMAZENADO
-HAVING COUNT(quant_forn) > 10;
