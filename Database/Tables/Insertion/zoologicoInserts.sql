@@ -1,3 +1,34 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Codespaces
+Marketplace
+Explore
+ 
+@HanielCostaDaSilva 
+AllanSmithll
+/
+Parque_Zoobotanico-BD1
+Public
+Fork your own copy of AllanSmithll/Parque_Zoobotanico-BD1
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+Parque_Zoobotanico-BD1/Database/Tables/Insertion/zoologicoInserts.sql
+@HanielCostaDaSilva
+HanielCostaDaSilva Feita alterações criticas
+…
+Latest commit b6735af 2 weeks ago
+ History
+ 1 contributor
+1472 lines (1317 sloc)  105 KB
+
 /* tabela VISITANTE*/ 
 INSERT VISITANTE(CPF, RG, nome,genero,email,data_nasc,pais_orig,esta_prov,cidade) values('11914755308', '1191475',	'Melvin',	'M',	'MelvinSConway@einrot.com',	"5-18-2003",	DEFAULT,	"Santa Catarina",	"Florianópolis"
 );
@@ -329,7 +360,7 @@ values("11344774", "Ansiedade em animais silvestres",  "Tratando das causas");
 insert PROJETO_PESQUISA(ID,titulo,subtitulo)
 
 values("01744478", "Poluição sonora frente aos animais",  "Comportamento Animal");
-insert saude,PROJETO_PESQUISA(ID,titulo,subtitulo)
+insert PROJETO_PESQUISA(ID,titulo,subtitulo)
 
 values("92475154", "Enfretamento a poluição",  "Impacto nos Animais");
 insert PROJETO_PESQUISA(ID,titulo,subtitulo)
@@ -1301,7 +1332,7 @@ values ("THDRHUABEV", "31231056284", "2022-05-20", NULL, "Reforma no habitat");
 insert MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) 
 
 values ("OZNYQASVOP", "31952488027", "2020-06-25", "2020-06-27", "Inovação para melhoramente do bem-estar animal");
-insert saude,MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) 
+insert MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) 
 
 values ("WSSCNMTLHC", "24766270906", "2004-08-19", "2003-12-15", "Reforma no habitat");
 insert MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) 
@@ -1310,7 +1341,7 @@ values ("XIRUZGRBAI", "51803701120", "2009-03-30", "2008-04-05", "Reforma no hab
 insert MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) 
 
 values ("TETZVZOOFR", "13522722755", "2021-07-26", "2021-07-26", "Inovação para melhoramente do bem-estar animal");
-insert saude,MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) 
+insert MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) 
 
 values ("KOCIISRBFF", "44858232350", "2014-07-27", "2014-07-27", "Manutenção emergencial");
 insert MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) 
@@ -1319,10 +1350,10 @@ values ("AWGKBAJRFQ", "72427309663", "2022-02-17", "2022-02-18", "Manutenção e
 insert MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) 
 
 values ("EZUMVXICDS", "31952488027", "2021-07-15", "2021-07-24", "Inovação para melhoramente do bem-estar animal");
-insert saude,MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) 
+insert MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) 
 
 values ("TEJAGKPHLM", "77871602871", "2022-06-16", "2021-02-04", "Inovação para melhoramente do bem-estar animal");
-insert saude,MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) 
+insert MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) 
 
 values ("TEJAGKPHLM", "61221444108", "2022-07-06", NULL, "Manutenção emergencial");
 insert MANUTENCAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) 
@@ -1334,139 +1365,137 @@ values ("VAWGOAEZIH", "72427309663", "2022-03-31", NULL, "Manutenção emergenci
 
 /* EXAME_ANIMAL */
 
-insert EXAME_ANIMAL(data_exam, saude,veterinario, animal) values(saude,"2010-07-12", "75256732345", "F8420I25K8");
-insert EXAME_ANIMAL(data_exam, saude,veterinario, animal) values(saude,"2021-01-28", "69535214606", "68306448J5");
-insert EXAME_ANIMAL(data_exam, saude,veterinario, animal) values(saude,"2022-07-02", "65129976022", "S8X5LA03CR");
-insert EXAME_ANIMAL(data_exam, saude,veterinario, animal) values(saude,"2022-05-12", "58756599949", "3461J17382");
-insert EXAME_ANIMAL(data_exam, saude,veterinario, animal) values(saude,"2004-12-24", "21424074564", "32QGTNHP80");
-insert EXAME_ANIMAL(data_exam, saude,veterinario, animal) values(saude,"2020-11-05", "65068305179", "14W4G81L60");
-insert EXAME_ANIMAL(data_exam, saude,veterinario, animal) values(saude,"2018-02-17", "60962609123", "3U8X2YL04O");
-insert EXAME_ANIMAL(data_exam, saude,veterinario, animal) values(saude,"2018-02-17", "46894747871", "3I61750241");
+insert EXAME_ANIMAL(data_exam, veterinario, animal) values("2010-07-12", "75256732345", "F8420I25K8");
+insert EXAME_ANIMAL(data_exam, veterinario, animal) values("2021-01-28", "69535214606", "68306448J5");
+insert EXAME_ANIMAL(data_exam, veterinario, animal) values("2022-07-02", "65129976022", "S8X5LA03CR");
+insert EXAME_ANIMAL(data_exam, veterinario, animal) values("2022-05-12", "58756599949", "3461J17382");
+insert EXAME_ANIMAL(data_exam, veterinario, animal) values("2004-12-24", "21424074564", "32QGTNHP80");
+insert EXAME_ANIMAL(data_exam, veterinario, animal) values("2020-11-05", "65068305179", "14W4G81L60");
+insert EXAME_ANIMAL(data_exam, veterinario, animal) values("2018-02-17", "60962609123", "3U8X2YL04O");
+insert EXAME_ANIMAL(data_exam, veterinario, animal) values("2018-02-17", "46894747871", "3I61750241");
 
-/* ANIMAL_INTERNADO */
-saude,
-insert(setor,animal,data_entr,data_saida)
+/* ANIMAL_INTERNACAO */
+insert ANIMAL_INTERNACAO(setor,animal,data_entr,data_saida)
 values("1201", "F8420I25K8", "2021-28-01", NULL);
 
-insert(setor,animal,data_entr,data_saida)
+insert ANIMAL_INTERNACAO(setor,animal,data_entr,data_saida)
 values("1301", "68306448J5", "2010-12-07", NULL);
 
-insert(setor,animal,data_entr,data_saida)
+insert ANIMAL_INTERNACAO(setor,animal,data_entr,data_saida)
 values("1303", "S8X5LA03CR", "2022-02-07", NULL);
 
-insert(setor,animal,data_entr,data_saida)
+insert ANIMAL_INTERNACAO(setor,animal,data_entr,data_saida)
 values("1105", "3461J17382", "2022-12-05", NULL);
 
-insert(setor,animal,data_entr,data_saida)
+insert ANIMAL_INTERNACAO(setor,animal,data_entr,data_saida)
 values("1301", "32QGTNHP80", "2004-24-12", NULL);
 
-insert(setor,animal,data_entr,data_saida)
+insert ANIMAL_INTERNACAO(setor,animal,data_entr,data_saida)
 values("1305", "14W4G81L60", "2020-05-11", NULL);
 
-insert(setor,animal,data_entr,data_saida)
+insert ANIMAL_INTERNACAO(setor,animal,data_entr,data_saida)
 values("1305", "3U8X2YL04O", "2018-17-02", NULL);
 
-insert(setor,animal,data_entr,data_saida)
+insert ANIMAL_INTERNACAO(setor,animal,data_entr,data_saida)
 values("1301", "3I61750241", "2008-18-04", NULL);
 
-insert(setor,animal,data_entr,data_saida)
+insert ANIMAL_INTERNACAO(setor,animal,data_entr,data_saida)
 values("1301", "6S32130145", "2020-30-01", NULL);
 
-insert(setor,animal,data_entr,data_saida)
+insert ANIMAL_INTERNACAO(setor,animal,data_entr,data_saida)
 values("1303", "2E5Y77S550", "2022-24-05", NULL);
 
-insert(setor,animal,data_entr,data_saida)
+insert ANIMAL_INTERNACAO(setor,animal,data_entr,data_saida)
 values("1603", "A5V5IVG0E0", "2011-06-04", NULL);
 
-insert(setor,animal,data_entr,data_saida)
+insert ANIMAL_INTERNACAO(setor,animal,data_entr,data_saida)
 values("1604", "74CH07608D", "2022-12-04", NULL);
 
-insert(setor,animal,data_entr,data_saida)
+insert ANIMAL_INTERNACAO(setor,animal,data_entr,data_saida)
 values("1604", "M261603122", "2011-15-03", NULL);
 
-insert(setor,animal,data_entr,data_saida)
+insert ANIMAL_INTERNACAO(setor,animal,data_entr,data_saida)
 values("1102", "05W0NOY832", "2020-05-01", NULL);
 
-insert(setor,animal,data_entr,data_saida)
+insert ANIMAL_INTERNACAO(setor,animal,data_entr,data_saida)
 values("1105", "UJ72152U1H", "2022-15-07", NULL);
 
-insert(setor,animal,data_entr,data_saida)
+insert ANIMAL_INTERNACAO(setor,animal,data_entr,data_saida)
 values("1102", "08524L2187", "2012-17-05", NULL);
 
-insert(setor,animal,data_entr,data_saida)
+insert ANIMAL_INTERNACAO(setor,animal,data_entr,data_saida)
 values("1201", "11J0X058LR", "2000-18-03", NULL);
 
-insert(setor,animal,data_entr,data_saida)
+insert ANIMAL_INTERNACAO(setor,animal,data_entr,data_saida)
 values("1604", "S001410K26", "2022-15-08", NULL);
 
-insert(setor,animal,data_entr,data_saida)
+insert ANIMAL_INTERNACAO(setor,animal,data_entr,data_saida)
 values("1604", "15FX04E60F", "2021-19-01", NULL);
 
-insert(setor,animal,data_entr,data_saida)
+insert ANIMAL_INTERNACAO(setor,animal,data_entr,data_saida)
 values("1604", "N452322623", "2022-26-07", NULL);
 
-insert(setor,animal,data_entr,data_saida)
+insert ANIMAL_INTERNACAO(setor,animal,data_entr,data_saida)
 values("1102", "P70554I0AM", "2021-01-03", "2021-02-02");
 
-insert(setor,animal,data_entr,data_saida)
+insert ANIMAL_INTERNACAO(setor,animal,data_entr,data_saida)
 values("1105", "M35027O253", "2010-28-08", "2010-12-10");
 
-insert(setor,animal,data_entr,data_saida)
+insert ANIMAL_INTERNACAO(setor,animal,data_entr,data_saida)
 values("1102", "I7L7837T5U", "2022-09-08", "2022-02-09");
 
-insert(setor,animal,data_entr,data_saida)
+insert ANIMAL_INTERNACAO(setor,animal,data_entr,data_saida)
 values("1105", "3461J17382", "2022-24-04", "2022-17-05");
 
-insert(setor,animal,data_entr,data_saida)
+insert ANIMAL_INTERNACAO(setor,animal,data_entr,data_saida)
 values("1204", "R14RQ8O886", "2005-7-12", "2005-5-12");
 
-insert(setor,animal,data_entr,data_saida)
+insert ANIMAL_INTERNACAO(setor,animal,data_entr,data_saida)
 values("1204", "I2256N2K52", "2022-10-11", "2022-16-11");
 
-insert(setor,animal,data_entr,data_saida)
+insert ANIMAL_INTERNACAO(setor,animal,data_entr,data_saida)
 values("1204", "M261603122", "2018-25-06", "2018-01-07");
 
-insert(setor,animal,data_entr,data_saida)
+insert ANIMAL_INTERNACAO(setor,animal,data_entr,data_saida)
 values("1102", "NTP764E45E", "2009-09-09", "2009-12-09");
 
-insert(setor,animal,data_entr,data_saida)
+insert ANIMAL_INTERNACAO(setor,animal,data_entr,data_saida)
 values("1102", "05W0NOY832", "2020-10-12", "2020-12-12");
 
-insert(setor,animal,data_entr,data_saida)
+insert ANIMAL_INTERNACAO(setor,animal,data_entr,data_saida)
 values("1304", "06LV43MR04", "2022-2-01", "2022-17-05");
 
-insert(setor,animal,data_entr,data_saida)
+insert ANIMAL_INTERNACAO(setor,animal,data_entr,data_saida)
 values("1304", "8267Y03574", "2012-10-02", "2012-16-02");
 
-insert(setor,animal,data_entr,data_saida)
+insert ANIMAL_INTERNACAO(setor,animal,data_entr,data_saida)
 values("1102", "45803578T7", "2011-2-08", "2011-2-08");
 
-insert(setor,animal,data_entr,data_saida)
+insert ANIMAL_INTERNACAO(setor,animal,data_entr,data_saida)
 values("1304", "05W0NOY832", "2022-2-01", "2022-15-02");
 
 /* PRESCRIÇÃO_EXAME */
 
 insert PRESCRICAO_EXAME(data_exam, veterinario, animal, remedio) 
-
 values ("2010-07-12", "75256732345", "F8420I25K8", "FAMNANAC");
-insert PRESCRICAO_EXAME(data_exam, veterinario, animal, remedio) 
 
+insert PRESCRICAO_EXAME(data_exam, veterinario, animal, remedio) 
 values ("2021-01-28", "69535214606", "68306448J5", "FAMCOWOW");
-insert PRESCRICAO_EXAME(data_exam, veterinario, animal, remedio) 
 
+insert PRESCRICAO_EXAME(data_exam, veterinario, animal, remedio) 
 values ("2022-07-02", "65129976022", "S8X5LA03CR", "FARIWWWX");
-insert PRESCRICAO_EXAME(data_exam, veterinario, animal, remedio) 
 
+insert PRESCRICAO_EXAME(data_exam, veterinario, animal, remedio) 
 values ("2018-02-17", "46894747871", "3I61750241", "FARIWWWX");
-insert PRESCRICAO_EXAME(data_exam, veterinario, animal, remedio) 
 
+insert PRESCRICAO_EXAME(data_exam, veterinario, animal, remedio) 
 values ("2022-05-12", "58756599949", "3461J17382", "FAMNANAC");
-insert PRESCRICAO_EXAME(data_exam, veterinario, animal, remedio) 
 
+insert PRESCRICAO_EXAME(data_exam, veterinario, animal, remedio) 
 values ("2004-12-24", "21424074564", "32QGTNHP80", "FAMNANAC");
-insert PRESCRICAO_EXAME(data_exam, veterinario, animal, remedio) 
 
+insert PRESCRICAO_EXAME(data_exam, veterinario, animal, remedio) 
 values ("2020-11-05", "65068305179", "14W4G81L60", "FARWENIU");
-insert PRESCRICAO_EXAME(data_exam, veterinario, animal, remedio) 
 
+insert PRESCRICAO_EXAME(data_exam, veterinario, animal, remedio) 
 values ("2018-02-17", "60962609123", "3U8X2YL04O", "FAMNANAC");
