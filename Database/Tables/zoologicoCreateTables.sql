@@ -241,7 +241,7 @@ CONSTRAINT FOREIGN KEY (Forn_CNPJ) REFERENCES FORNECEDOR(CNPJ)
 CREATE TABLE IF NOT EXISTS MANUNTECAO_HABITAT
 (
 habitat 	char(10)	NOT NULL,
-funcionario	char(10)	    NOT NULL,
+funcionario	char(11)	    NOT NULL,
 data_inicio	varchar(40)	NOT NULL,
 data_final	varchar(40)	NULL,	
 descricao	text	    NOT NULL,
