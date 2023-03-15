@@ -1,34 +1,3 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Codespaces
-Marketplace
-Explore
- 
-@HanielCostaDaSilva 
-AllanSmithll
-/
-Parque_Zoobotanico-BD1
-Public
-Fork your own copy of AllanSmithll/Parque_Zoobotanico-BD1
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Parque_Zoobotanico-BD1/Database/Tables/Insertion/zoologicoInserts.sql
-@HanielCostaDaSilva
-HanielCostaDaSilva Feita alterações criticas
-…
-Latest commit b6735af 2 weeks ago
- History
- 1 contributor
-1472 lines (1317 sloc)  105 KB
-
 /* tabela VISITANTE*/ 
 INSERT VISITANTE(CPF, RG, nome,genero,email,data_nasc,pais_orig,esta_prov,cidade) values('11914755308', '1191475',	'Melvin',	'M',	'MelvinSConway@einrot.com',	"5-18-2003",	DEFAULT,	"Santa Catarina",	"Florianópolis"
 );
