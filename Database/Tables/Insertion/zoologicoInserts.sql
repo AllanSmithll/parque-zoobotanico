@@ -550,8 +550,9 @@ INSERT PROJETO_PESQUISA(ID,titulo,subtitulo)
 VALUES("11344774", "Ansiedade em animais silvestres",  "Tratando das causas");
 INSERT PROJETO_PESQUISA(ID,titulo,subtitulo)
 
+
 VALUES("01744478", "Poluição sonora frente aos animais",  "Comportamento Animal");
-INSERT PROJETO_PESQUISA(ID,titulo,subtitulo)
+INSERT PROJETO_PESQUISA(ID,titulo,subtitulo
 
 VALUES("92475154", "Enfretamento a poluição",  "Impacto nos Animais");
 INSERT PROJETO_PESQUISA(ID,titulo,subtitulo)
@@ -1464,6 +1465,7 @@ INSERT FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cida
 VALUES ("65406506173","18947838342","Jose paulo","Veterinário", 13750.00, "59064340", "Rua Anabal Correia", "Candelaria", "Natal", "58493437845", NULL );
 
 INSERT FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CNH) 
+
 VALUES ("40752683541","18547038342","Jose inacio","Manutenção", 11840.00, "49042590", " Rua Francisco Rollemberg Ramos", " Sao Conrado", "Aracaju", "58493437845", NULL );
 
 INSERT FUNCIONARIO(matricula, CPF, nome, funcao, salario, CEP, rua, bairro, cidade, gerente, CNH) 
@@ -1625,6 +1627,8 @@ INSERT MANUNTECAO_HABITAT(habitat, funcionario, data_inicio, data_final, descric
 VALUES ("OZNYQASVOP", "31952488027", "2020-06-25", "2020-06-27", "Inovação para melhoramente do bem-estar animal");
 INSERT MANUNTECAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) 
 
+
+
 VALUES ("WSSCNMTLHC", "24766270906", "2004-08-19", "2003-12-15", "Reforma no habitat");
 INSERT MANUNTECAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) 
 
@@ -1637,16 +1641,19 @@ INSERT MANUNTECAO_HABITAT(habitat, funcionario, data_inicio, data_final, descric
 VALUES ("KOCIISRBFF", "44858232350", "2014-07-27", "2014-07-27", "Manutenção emergencial");
 INSERT MANUNTECAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) 
 
+
 VALUES ("AWGKBAJRFQ", "72427309663", "2022-02-17", "2022-02-18", "Manutenção emergencial");
 INSERT MANUNTECAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) 
 
 VALUES ("EZUMVXICDS", "31952488027", "2021-07-15", "2021-07-24", "Inovação para melhoramente do bem-estar animal");
+
 
 INSERT MANUNTECAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) 
 VALUES ("TEJAGKPHLM", "77871602871", "2022-06-16", "2021-02-04", "Inovação para melhoramente do bem-estar animal");
 
 INSERT MANUNTECAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) 
 VALUES ("TEJAGKPHLM", "61221444108", "2022-07-06", NULL, "Manutenção emergencial");
+
 
 INSERT MANUNTECAO_HABITAT(habitat, funcionario, data_inicio, data_final, descricao) 
 
